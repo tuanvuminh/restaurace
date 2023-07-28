@@ -14,18 +14,12 @@ public class Order {
     private String notesOfCustomer;
     private LocalDateTime orderedTime;
     private LocalDateTime fulfilmentTime;
-    private Boolean completedOrder = false;
     private int numOfOrderedDishes = 1;
-
 
     public Order(int numberOfTable, Waiter waiter, Dish dish, String notesOfCustomer,
                  LocalDateTime orderedTime, LocalDateTime fulfilmentTime) {
-        this.numberOfTable = numberOfTable;
-        this.waiter = waiter;
-        this.dish = dish;
-        this.notesOfCustomer = notesOfCustomer;
-        this.orderedTime = orderedTime;
-        this.fulfilmentTime = fulfilmentTime;
+        this(numberOfTable, waiter, dish, notesOfCustomer, orderedTime);
+        setFulfilmentTime(fulfilmentTime);
     }
 
     public Order(int numberOfTable, Waiter waiter, Dish dish, String notesOfCustomer, LocalDateTime orderedTime) {
@@ -34,6 +28,10 @@ public class Order {
         this.dish = dish;
         this.notesOfCustomer = notesOfCustomer;
         this.orderedTime = orderedTime;
+    }
+
+    public Order(int numberOfTable, Waiter waiter, Dish dish, LocalDateTime orderedTime) {
+        this(numberOfTable, waiter, dish, "", orderedTime);
     }
 
     public int getNumberOfTable() {
@@ -100,14 +98,6 @@ public class Order {
         this.fulfilmentTime = fulfilmentTime;
     }
 
-    public Boolean getCompletedOrder() {
-        return completedOrder;
-    }
-
-    public void setCompletedOrder(Boolean completedOrder) {
-        this.completedOrder = completedOrder;
-    }
-
     public int getNumOfOrderedDishes() {
         return numOfOrderedDishes;
     }
@@ -120,28 +110,11 @@ public class Order {
         return date.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public String getNumberOfDishesIfBiggerThenOne() {
-        String result = "";
-        if (numOfOrderedDishes > 1) {
-            result = numOfOrderedDishes + "x";
-        }
-        return result;
-    }
-
-    public String orderToPrint() {
-        return "." + " "
-                + dish + " "
-                + getNumberOfDishesIfBiggerThenOne() + " " + "(" + (dish.getPrice().multiply(BigDecimal.valueOf(numOfOrderedDishes))) + " Kč" + ")"
-                + ":" + "\t"
-                + formatTime(orderedTime)
-                + "–"
-                + formatTime(fulfilmentTime) + "\t"
-                + "číšník č. " + waiter.getWaiterId();
-    }
 
     public String exportOrder() {
-        return "Stůl č." + numberOfTable +", čišník: " + waiter + ", objednáné jídlo: " + dish +
-                ", objednávka " + numberOfOrder + ". , poznámky od zákazníka: " + notesOfCustomer + ", čas objednávky: "
-                + orderedTime + " , čas dokončení objednávky: " + fulfilmentTime;
+        return "" + dish + " " + "(" + (dish.getPrice().multiply(BigDecimal.valueOf(numOfOrderedDishes))) + " Kč" + ")"
+                + ": " + formatTime(orderedTime) + "–"
+                + formatTime(fulfilmentTime)
+                + " číšník č. " + waiter.getWaiterId();
     }
 }

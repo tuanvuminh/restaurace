@@ -28,4 +28,9 @@ public class Waiter {
     public void setNumberOfOrders(int numberOfOrders) {
         this.numberOfOrders = numberOfOrders;
     }
+
+    @Override
+    public String toString() {
+        return "Čišník " + waiterId;
+    }
 }

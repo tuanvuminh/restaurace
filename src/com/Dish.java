@@ -1,5 +1,7 @@
 package com;
 
+import com.exceptions.OrderException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,21 +26,6 @@ public class Dish {
 
     public Dish(String title, BigDecimal price, int preparationTime, Category category) {
         this(title, price, preparationTime, category, "blank");
-    }
-
-    public static Dish parseDish(String data) throws OrderException {
-        String [] items = new String[0];
-        try {
-            items = data.split("\t");
-            String title = items[0];
-            BigDecimal price = new BigDecimal(items[1]);
-            int preparationTime = Integer.parseInt(items[2]);
-            Category category = Category.valueOf(items[3]);
-            String imageMain = items[4];
-            return new Dish(title, price, preparationTime, category, imageMain);
-        } catch (IllegalArgumentException e) {
-            throw new OrderException("Poškozený soubor, nelze načíst data z: ");
-        }
     }
 
     public void addImage(String mainImage) {

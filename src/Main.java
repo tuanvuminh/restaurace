@@ -37,11 +37,21 @@ public class Main {
         menu.addDish(dish4);
         menu.getMenu();
 
+        Waiter adam = new Waiter(1);
+        Waiter erik = new Waiter(2);
+
        try {
            menu.saveToFile(Settings.filename(), Settings.delimiter());
        } catch (OrderException e) {
            System.err.println("Chyba při zápisu do souboru!" +e.getLocalizedMessage());
        }
+
+       Order firstOrder = new Order(5, adam, dish1, LocalDateTime.of(2023, 7,28, 15,15));
+       restaurantManager.addOrder(firstOrder);
+
+       System.out.println(restaurantManager.getNumberOfUncompletedOrders());
+
+
 
 
     }
