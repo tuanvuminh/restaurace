@@ -1,5 +1,7 @@
 package com;
 
+import com.exceptions.OrderException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ public class Menu {
             menu.add(dish);
             dish.setOnMenu(true);
         } else {
-            System.err.println("“"+ dish + "“ nelze zařadit do menu, protože není v zásobníku receptů!");
+            System.err.println("“" + dish + "“ nelze zařadit do menu, protože není v zásobníku receptů!");
         }
     }
 
@@ -57,7 +59,8 @@ public class Menu {
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(fileName)))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                menu.add(Dish.parseDish(line)); }
+                menu.add(Dish.parseDish(line));
+            }
         } catch (FileNotFoundException e) {
             throw new OrderException("Soubor " + fileName + " nenalezen!");
         }
@@ -66,7 +69,7 @@ public class Menu {
     public void getMenu() {
         System.out.println("Menu");
         for (Dish dish : menu) {
-            System.out.println("“"+dish.getCategory().toString()+"“ " + dish.getTitle()+ ", cena: " +dish.getPrice()+ " Kč");
+            System.out.println("“" + dish.getCategory().toString() + "“ " + dish.getTitle() + ", cena: " + dish.getPrice() + " Kč");
         }
     }
 }
