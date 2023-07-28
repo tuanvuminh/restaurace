@@ -11,14 +11,14 @@ public class Order {
     private Dish dish;
     private static int orderCounter = 1;
     private int numberOfOrder= orderCounter++;
-    private Customer notesOfCustomer;
+    private String notesOfCustomer;
     private LocalDateTime orderedTime;
     private LocalDateTime fulfilmentTime;
     private Boolean completedOrder = false;
     private int numOfOrderedDishes = 1;
 
 
-    public Order(int numberOfTable, Waiter waiter, Dish dish, Customer notesOfCustomer,
+    public Order(int numberOfTable, Waiter waiter, Dish dish, String notesOfCustomer,
                  LocalDateTime orderedTime, LocalDateTime fulfilmentTime) {
         this.numberOfTable = numberOfTable;
         this.waiter = waiter;
@@ -28,7 +28,7 @@ public class Order {
         this.fulfilmentTime = fulfilmentTime;
     }
 
-    public Order(int numberOfTable, Waiter waiter, Dish dish, Customer notesOfCustomer, LocalDateTime orderedTime) {
+    public Order(int numberOfTable, Waiter waiter, Dish dish, String notesOfCustomer, LocalDateTime orderedTime) {
         this.numberOfTable = numberOfTable;
         this.waiter = waiter;
         this.dish = dish;
@@ -76,11 +76,11 @@ public class Order {
         this.numberOfOrder = numberOfOrder;
     }
 
-    public Customer getNotesOfCustomer() {
+    public String getNotesOfCustomer() {
         return notesOfCustomer;
     }
 
-    public void setNotesOfCustomer(Customer notesOfCustomer) {
+    public void setNotesOfCustomer(String notesOfCustomer) {
         this.notesOfCustomer = notesOfCustomer;
     }
 

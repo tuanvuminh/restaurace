@@ -1,4 +1,6 @@
 import com.*;
+import com.exceptions.OrderException;
+import com.settings.Settings;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

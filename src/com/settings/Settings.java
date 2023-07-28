@@ -1,4 +1,4 @@
-package com;
+package com.settings;
 
 public class Settings {
     public static String filename() {

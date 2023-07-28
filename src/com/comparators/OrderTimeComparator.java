@@ -1,4 +1,6 @@
-package com;
+package com.comparators;
+
+import com.Order;
 
 import java.util.Comparator;
 
