@@ -8,28 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CookBook {
-    private List<Dish> dishes = new ArrayList<>();
+    private List <Dish> dishes = new ArrayList<>();
 
     public void addDish(Dish dish) {
         dishes.add(dish);
+        dish.setInCookBook(true);
     }
 
     public void removeDish(Dish dish) {
         dishes.remove(dish);
     }
 
+    public void removeAll() {
+        dishes.removeAll(dishes);
+    }
+
     public void getDish(int index) {
         dishes.get(index);
     }
 
-    public void exportToFile(String fileName) throws OrderException {
-        try (PrintWriter outputWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
-            for (Dish dish : dishes) {
-                outputWriter.println(dish.exportToString());
-            }
-        } catch (IOException e) {
-            throw new OrderException("Nepodařilo se nahrát data do souboru: " + fileName);
+    public void getCookbook () {
+        System.out.println("Zásobník jídel");
+        for (Dish dish : dishes) {
+            System.out.println(dish.getMainImage()+ " " +dish.getCategory().toString()+ ": " +dish.getTitle()+ ", čas přípravy: "
+                    +dish.getPreparationTime()+ " minut");
         }
-
     }
 }

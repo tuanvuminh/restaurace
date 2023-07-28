@@ -1,8 +1,7 @@
 package com;
 
 public enum Category {
-    STARTER ("předkrm"), MAIN ("hlavní jídlo"), DESSERT ("dezert"),
-    ALCOHOL ("alkoholické pití"), NONALCOHOLIC ("nealkoholické pití");
+    STARTER ("předkrm"), MAIN ("hlavní jídlo"), DESSERT ("dezert");
     private String description;
 
     Category(String description) {
