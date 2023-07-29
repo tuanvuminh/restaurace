@@ -136,4 +136,9 @@ public class Order {
                 + formatTime(fulfilmentTime)
                 + " číšník č. " + waiter.getWaiterId();
     }
+
+    @Override
+    public String toString() {
+        return "Objednávka č. " + numberOfOrder + " " + dish +" čas objednávky " + orderedTime;
+    }
 }

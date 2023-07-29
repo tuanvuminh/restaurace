@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CookBook {
+public class CookBook extends Menu{
     private List <Dish> dishes = new ArrayList<>();
 
     public void addDish(Dish dish) {

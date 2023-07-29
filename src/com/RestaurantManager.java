@@ -62,7 +62,7 @@ public class RestaurantManager {
     public void sortByTimeOfOrder() {
         for (Order order : orderList) {
             Collections.sort(orderList, new OrderTimeComparator());
-            System.out.println("Objednávky podle času zadání: " + orderList);
+            System.out.println(orderList);
         }
     }
 
@@ -75,7 +75,7 @@ public class RestaurantManager {
 
     // 3.
 
-    public String getOrdersInfoPerWaiter(Waiter waiter) {
+    public String getInfoOfOrdersPerWaiter(Waiter waiter) {
         BigDecimal totalPrice = BigDecimal.ZERO;
         int numberOfOrders = 0;
         for (Order order : orderList) {
@@ -102,7 +102,7 @@ public class RestaurantManager {
                     averageTimeOfOrdersToComplete = timeToCompleteAllOrders / numberOfOrders;
                 }
             }
-            return "Průměrná doba zpracování všech objednávek: " + averageTimeOfOrdersToComplete + " min";
+            return "Průměrná doba zpracování všech objednávek: " + averageTimeOfOrdersToComplete + " minut";
         } catch (NullPointerException e) {
             throw new OrderException("Některé objednávky stále nejsou uzavřené!");
         }
@@ -129,7 +129,8 @@ public class RestaurantManager {
             if (order.getTable().getNumberOfTable() == table.getNumberOfTable()) {
                 System.out.println(order.getNumberOfOrder() + "." + " "
                         + order.getDish() + " "
-                        + order.getNumberOfDishesIfMoreThenOne() + " " + "(" + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
+                        + order.getNumberOfDishesIfMoreThenOne() + " " + "("
+                        + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
                         + ":" + "\t"
                         + order.formatTime(order.getOrderedTime())
                         + "–"
