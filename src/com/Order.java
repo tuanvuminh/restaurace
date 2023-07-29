@@ -6,40 +6,40 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Order {
-    private int numberOfTable;
-    private Waiter waiter;
-    private Dish dish;
     private static int orderCounter = 1;
     private int numberOfOrder= orderCounter++;
+    private Table table;
+    private Waiter waiter;
+    private Dish dish;
     private String notesOfCustomer;
     private LocalDateTime orderedTime;
     private LocalDateTime fulfilmentTime;
     private int numOfOrderedDishes = 1;
 
-    public Order(int numberOfTable, Waiter waiter, Dish dish, String notesOfCustomer,
+    public Order(Table table, Waiter waiter, Dish dish, String notesOfCustomer,
                  LocalDateTime orderedTime, LocalDateTime fulfilmentTime) {
-        this(numberOfTable, waiter, dish, notesOfCustomer, orderedTime);
+        this(table, waiter, dish, notesOfCustomer, orderedTime);
         setFulfilmentTime(fulfilmentTime);
     }
 
-    public Order(int numberOfTable, Waiter waiter, Dish dish, String notesOfCustomer, LocalDateTime orderedTime) {
-        this.numberOfTable = numberOfTable;
+    public Order(Table table, Waiter waiter, Dish dish, String notesOfCustomer, LocalDateTime orderedTime) {
+        this.table = table;
         this.waiter = waiter;
         this.dish = dish;
         this.notesOfCustomer = notesOfCustomer;
         this.orderedTime = orderedTime;
     }
 
-    public Order(int numberOfTable, Waiter waiter, Dish dish, LocalDateTime orderedTime) {
-        this(numberOfTable, waiter, dish, "", orderedTime);
+    public Order(Table table, Waiter waiter, Dish dish, LocalDateTime orderedTime) {
+        this(table, waiter, dish, "", orderedTime);
     }
 
-    public int getNumberOfTable() {
-        return numberOfTable;
+    public Table getTable() {
+        return table;
     }
 
-    public void setNumberOfTable(int numberOfTable) {
-        this.numberOfTable = numberOfTable;
+    public void setTable(Table table) {
+        this.table = table;
     }
 
     public Waiter getWaiter() {
@@ -100,6 +100,14 @@ public class Order {
 
     public int getNumOfOrderedDishes() {
         return numOfOrderedDishes;
+    }
+
+    public String getNumberOfDishesIfBiggerThenOne() {
+        String result = "";
+        if (numOfOrderedDishes > 1) {
+            result = numOfOrderedDishes + "x";
+        }
+        return result;
     }
 
     public void setNumOfOrderedDishes(int numOfOrderedDishes) {

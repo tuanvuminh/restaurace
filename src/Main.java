@@ -29,29 +29,42 @@ public class Main {
 
         cookBook.addDish(dish1);
         cookBook.addDish(dish2);
+        cookBook.addDish(dish3);
         cookBook.addDish(dish4);
         cookBook.getCookbook();
 
         menu.addDish(dish1);
         menu.addDish(dish2);
-        menu.addDish(dish4);
+        menu.addDish(dish3);
         menu.getMenu();
 
         Waiter adam = new Waiter(1);
         Waiter erik = new Waiter(2);
+        Table table1 = new Table(5);
+        Table table2 = new Table(10);
 
-       try {
-           menu.saveToFile(Settings.filename(), Settings.delimiter());
-       } catch (OrderException e) {
-           System.err.println("Chyba při zápisu do souboru!" +e.getLocalizedMessage());
-       }
+        try {
+            menu.saveToFile(Settings.filename(), Settings.delimiter());
+        } catch (OrderException e) {
+            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+        }
 
-       Order firstOrder = new Order(5, adam, dish1, LocalDateTime.of(2023, 7,28, 15,15));
-       restaurantManager.addOrder(firstOrder);
+        Order firstOrder = new Order(table1, adam, dish1, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 15));
+        Order secondOrder = new Order(table2, adam, dish2, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 20));
+        restaurantManager.addOrder(firstOrder);
+        restaurantManager.addOrder(secondOrder);
+        firstOrder.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 45));
+        secondOrder.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 50));
 
-       System.out.println(restaurantManager.getNumberOfUncompletedOrders());
+        try {
+            System.out.println(restaurantManager.averageTimeOfOrdersToComplete());
+        } catch (OrderException e) {
+            System.err.println(e.getLocalizedMessage());
+        }
 
-
+        restaurantManager.getOrderedDishesOfToday();
+        restaurantManager.getOrdersPerTable(table1);
+        restaurantManager.getOrdersPerTable(table2);
 
 
     }
