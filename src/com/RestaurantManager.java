@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -75,15 +74,17 @@ public class RestaurantManager {
     }
 
     // 3.
-    public String printOrdersPerWaiter(Waiter waiter) {
-        int waitersNumberOfOrders = 0;
+
+    public String getOrdersInfoPerWaiter(Waiter waiter) {
         BigDecimal totalPrice = BigDecimal.ZERO;
+        int numberOfOrders = 0;
         for (Order order : orderList) {
-            if (order.getWaiter() == waiter)
-                waitersNumberOfOrders++;
-            totalPrice = order.getDish().getPrice();
+            if (order.getWaiter() == waiter) {
+                numberOfOrders++;
+                totalPrice = totalPrice.add(order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes())));
+            }
         }
-        return waiter.toString() + " [počet objednávek: " + waitersNumberOfOrders + "] [celková cena: " + totalPrice + " Kč]";
+        return waiter.toString()+ " [počet objednávek: " + numberOfOrders + "] [celková cena objednávek: " + totalPrice + " Kč]";
     }
 
     // 4.
@@ -128,7 +129,7 @@ public class RestaurantManager {
             if (order.getTable().getNumberOfTable() == table.getNumberOfTable()) {
                 System.out.println(order.getNumberOfOrder() + "." + " "
                         + order.getDish() + " "
-                        + order.getNumberOfDishesIfBiggerThenOne() + " " + "(" + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumOfOrderedDishes()))) + " Kč" + ")"
+                        + order.getNumberOfDishesIfMoreThenOne() + " " + "(" + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
                         + ":" + "\t"
                         + order.formatTime(order.getOrderedTime())
                         + "–"

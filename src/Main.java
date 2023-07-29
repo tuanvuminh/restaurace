@@ -32,6 +32,7 @@ public class Main {
         cookBook.addDish(dish3);
         cookBook.addDish(dish4);
         cookBook.getCookbook();
+        System.out.println();
 
         menu.addDish(dish1);
         menu.addDish(dish2);
@@ -50,11 +51,21 @@ public class Main {
         }
 
         Order firstOrder = new Order(table1, adam, dish1, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 15));
-        Order secondOrder = new Order(table2, adam, dish2, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 20));
+        Order secondOrder = new Order(table2, adam, dish2, 3,
+                LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 20));
+        Order thirdOrder = new Order(table2, adam, dish2, 3,
+                LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 20));
+
         restaurantManager.addOrder(firstOrder);
         restaurantManager.addOrder(secondOrder);
+        restaurantManager.addOrder(thirdOrder);
+
         firstOrder.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 45));
         secondOrder.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 50));
+        thirdOrder.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 18, 50));
+
+        System.out.println();
+        System.out.println(restaurantManager.getOrdersInfoPerWaiter(adam));
 
         try {
             System.out.println(restaurantManager.averageTimeOfOrdersToComplete());
@@ -62,9 +73,6 @@ public class Main {
             System.err.println(e.getLocalizedMessage());
         }
 
-        restaurantManager.getOrderedDishesOfToday();
-        restaurantManager.getOrdersPerTable(table1);
-        restaurantManager.getOrdersPerTable(table2);
 
 
     }

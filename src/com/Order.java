@@ -1,7 +1,6 @@
 package com;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,27 +10,31 @@ public class Order {
     private Table table;
     private Waiter waiter;
     private Dish dish;
-    private String notesOfCustomer;
+    private int numberOfOrderedDishes;
     private LocalDateTime orderedTime;
+    private String notesOfCustomer;
     private LocalDateTime fulfilmentTime;
-    private int numOfOrderedDishes = 1;
+    private BigDecimal totalPriceOfOrder;
 
-    public Order(Table table, Waiter waiter, Dish dish, String notesOfCustomer,
-                 LocalDateTime orderedTime, LocalDateTime fulfilmentTime) {
-        this(table, waiter, dish, notesOfCustomer, orderedTime);
-        setFulfilmentTime(fulfilmentTime);
-    }
-
-    public Order(Table table, Waiter waiter, Dish dish, String notesOfCustomer, LocalDateTime orderedTime) {
+    public Order(Table table, Waiter waiter, Dish dish, int numberOfOrderedDishes, LocalDateTime orderedTime, String notesOfCustomer) {
         this.table = table;
         this.waiter = waiter;
         this.dish = dish;
-        this.notesOfCustomer = notesOfCustomer;
+        this.numberOfOrderedDishes = numberOfOrderedDishes;
         this.orderedTime = orderedTime;
+        this.notesOfCustomer = notesOfCustomer;
     }
 
     public Order(Table table, Waiter waiter, Dish dish, LocalDateTime orderedTime) {
-        this(table, waiter, dish, "", orderedTime);
+        this(table, waiter, dish, 1, orderedTime, "");
+    }
+
+    public Order(Table table, Waiter waiter, Dish dish, LocalDateTime orderedTime, String notesOfCustomer) {
+        this(table, waiter, dish, 1, orderedTime, notesOfCustomer);
+    }
+
+    public Order(Table table, Waiter waiter, Dish dish, int numberOfOrderedDishes, LocalDateTime orderedTime) {
+        this(table, waiter, dish, numberOfOrderedDishes, orderedTime, "");
     }
 
     public Table getTable() {
@@ -98,20 +101,28 @@ public class Order {
         this.fulfilmentTime = fulfilmentTime;
     }
 
-    public int getNumOfOrderedDishes() {
-        return numOfOrderedDishes;
+    public int getNumberOfOrderedDishes() {
+        return numberOfOrderedDishes;
     }
 
-    public String getNumberOfDishesIfBiggerThenOne() {
+    public String getNumberOfDishesIfMoreThenOne() {
         String result = "";
-        if (numOfOrderedDishes > 1) {
-            result = numOfOrderedDishes + "x";
+        if (numberOfOrderedDishes > 1) {
+            result = numberOfOrderedDishes + "x";
         }
         return result;
     }
 
-    public void setNumOfOrderedDishes(int numOfOrderedDishes) {
-        this.numOfOrderedDishes = numOfOrderedDishes;
+    public void setNumberOfOrderedDishes(int numberOfOrderedDishes) {
+        this.numberOfOrderedDishes = numberOfOrderedDishes;
+    }
+
+    public BigDecimal getTotalPriceOfOrder() {
+        return totalPriceOfOrder;
+    }
+
+    public void setTotalPriceOfOrder(BigDecimal totalPriceOfOrder) {
+        this.totalPriceOfOrder = totalPriceOfOrder;
     }
 
     public String formatTime(LocalDateTime date) {
@@ -120,7 +131,7 @@ public class Order {
 
 
     public String exportOrder() {
-        return "" + dish + " " + "(" + (dish.getPrice().multiply(BigDecimal.valueOf(numOfOrderedDishes))) + " Kč" + ")"
+        return "" + dish + " " + "(" + (dish.getPrice().multiply(BigDecimal.valueOf(numberOfOrderedDishes))) + " Kč" + ")"
                 + ": " + formatTime(orderedTime) + "–"
                 + formatTime(fulfilmentTime)
                 + " číšník č. " + waiter.getWaiterId();
