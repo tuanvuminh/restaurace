@@ -80,5 +80,4 @@ public class CookBook extends Menu {
                     + dish.getPreparationTime() + " minut");
         }
     }
-
 }

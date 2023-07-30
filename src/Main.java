@@ -181,5 +181,4 @@ public class Main {
             System.err.println("Chyba při zápisu ze souboru! " + e.getLocalizedMessage());
         }
     }
-
 }

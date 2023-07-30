@@ -9,5 +9,4 @@ public class OrderWaiterComparator implements Comparator<Order> {
     public int compare(Order p1, Order p2) {
         return p1.getWaiter().getWaiterId() - (p2.getWaiter().getWaiterId());
     }
-
 }

@@ -94,5 +94,4 @@ public class Dish {
     public String toString() {
         return title;
     }
-
 }

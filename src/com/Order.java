@@ -135,5 +135,4 @@ public class Order {
     public String toString() {
         return "Objednávka č. " + numberOfOrder + " " + dish +" čas objednávky " + orderedTime;
     }
-
 }
