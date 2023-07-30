@@ -86,7 +86,6 @@ public class RestaurantManager {
     }
 
     // 3.
-
     public String getInfoOfOrdersPerWaiter(Waiter waiter) {
         BigDecimal totalPrice = BigDecimal.ZERO;
         int numberOfOrders = 0;
