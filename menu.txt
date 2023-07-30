@@ -1,2 +1,2 @@
-Kuřecí řízek obalovaný 150 g	130	30	kureci-rizek-01	hlavní jídlo
-Pstruh na víně 200 g	200	35	pstruh-na-vine-01	hlavní jídlo
+Kuřecí řízek obalovaný 150 g	130	30	MAIN	blank	
+Pstruh na víně 200 g	200	35	MAIN	pstruh-na-vine-05	

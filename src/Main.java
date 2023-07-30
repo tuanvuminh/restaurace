@@ -5,12 +5,13 @@ import com.settings.Settings;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        // Testovací scénář
-        // 1.
+    public static void main(String[] args) throws OrderException {
+
+        // 1. Testovací scénář
         RestaurantManager restaurantManager = new RestaurantManager();
         CookBook cookBook = new CookBook();
         Menu menu = new Menu();
@@ -33,7 +34,13 @@ public class Main {
             System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
         }
 
-        // 2.
+        Image image1 = new Image("pstruh-na-vine-05");
+        Image image2 = new Image("kureci-rizek-05");
+        ListOfImages images = new ListOfImages();
+        images.addImage(image1);
+        images.addImage(image2);
+
+        // 2. Připrav testovací data. Vlož do systému 3 jídla.
         Dish dish1 = new Dish("Kuřecí řízek obalovaný 150 g", BigDecimal.valueOf(130), 30, Category.MAIN, "kureci-rizek-01"
         );
         Dish dish2 = new Dish("Hranolky 150g", BigDecimal.valueOf(50), 15, Category.MAIN
@@ -41,15 +48,25 @@ public class Main {
         Dish dish3 = new Dish("Pstruh na víně 200 g", BigDecimal.valueOf(200), 35, Category.MAIN, "pstruh-na-vine-01"
         );
 
+        // Odebrání fotky
+        dish1.removeMainImage();
+
+        //Přidání fotky
+        dish3.addMainImage(images.getImage(image1));
+
         cookBook.addDish(dish1);
         cookBook.addDish(dish2);
         cookBook.addDish(dish3);
         cookBook.printCookbook();
 
+        // První a třetí jídlo zařaď do aktuálního menu, druhé jídlo nikoli.
+
         System.out.println();
         menu.addDish(dish1);
         menu.addDish(dish3);
         menu.printMenu();
+
+        // Vytvoř alespoň tři objednávky pro stůj číslo 15 a jednu pro stůj číslo 2. Objednávky řeší alespoň dva různí číšníci.
 
         Table table15 = new Table(15);
         Table table2 = new Table(2);
@@ -72,36 +89,55 @@ public class Main {
 
         restaurantManager.addOrder(order1);
         restaurantManager.addOrder(order2);
+        restaurantManager.addOrder(order3);
+        restaurantManager.addOrder(order4);
+
+        // Min. dvě objednávky jsou již uzavřené, minimálně dvě ještě nikoli.
 
         order1.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 11, 45)
         );
-        order2.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 12, 40)
+        order2.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 12, 45)
         );
 
-        // 3.
+        // Test uložení neuzavřených objednávek do souboru
+        try {
+            restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
+        } catch (OrderException e) {
+            System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
+        }
+
+        // 3. Vyzkoušej přidat objednávku jídla, které není v menu — aplikace musí ohlásit chybu.
         Order testOfOrderingADishWhichIsNotOnMenu = new Order(table15, erik, dish2, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 00)
         );
         restaurantManager.addOrder(testOfOrderingADishWhichIsNotOnMenu);
 
-        // 4.
+        // 4. Uzavření objednávek
+        order3.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 16, 00)
+        );
+        order4.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 16, 00)
+        );
+
         try {
             restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
         // 5. Požadované výstupy
-        // 5.1.
+        // 5.1. Kolik objednávek je aktuálně rozpracovaných a nedokončených.
         System.out.println();
         System.out.println(restaurantManager.getNumberOfUncompletedOrders());
 
-        // 5.2
+        // 5.2 Možnost seřadit objednávky podle číšníka nebo času zadání.
+        //restaurantManager.sortByTimeOfOrder();
+        //restaurantManager.sortByWaiterId();
 
-        // 5.3
+
+        // 5.3 Celková cena objednávek pro jednotlivé číšníky (u každého číšníka bude počet jeho zadaných objednávek).
         System.out.println(restaurantManager.getInfoOfOrdersPerWaiter(adam));
         System.out.println(restaurantManager.getInfoOfOrdersPerWaiter(erik));
 
-        // 5.4
+        // 5.4 Průměrná doba zpracování objednávek, které byly zadány v určitém časovém období.
         System.out.println();
         try {
             System.out.println(restaurantManager.averageTimeOfOrdersToComplete());
@@ -109,33 +145,45 @@ public class Main {
             System.err.println(e.getLocalizedMessage());
         }
 
-        // 5.5
+        // 5.5 Seznam jídel, které byly dnes objednány. Bez ohledu na to, kolikrát byly objednány.
         System.out.println();
         restaurantManager.getOrderedDishesOfToday();
 
-        // 5.6
+        // 5.6 Export seznamu objednávek pro jeden stůl ve formátu (například pro výpis na obrazovku):
         System.out.println();
-        restaurantManager.getOrdersPerTable(table15);
+        try {
+            restaurantManager.getOrdersPerTable(table15);
+        } catch (OrderException e) {
+            System.err.println(e.getLocalizedMessage());
+        }
 
-        // 6.
+        // 6. Změněná data ulož na disk. Po spuštění aplikace musí být data opět v pořádku načtena.
 
         try {
             restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
         try {
             menu.saveToFile(Settings.filename2(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
         try {
             cookBook.saveToFile(Settings.filename3(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
+        // 7. Připrav do složky projektu poškozený vstupní soubor/poškozené vstupní soubory, které se nepodaří načíst.
+        //    Aplikace se při spuštění s těmito soubory musí zachovat korektně — nesmí spadnout..
+
+        try {
+            menu.loadFromFile(Settings.filename5(), Settings.delimiter());
+        } catch (OrderException e) {
+            System.err.println("Chyba při zápisu ze souboru! " + e.getLocalizedMessage());
+        }
     }
 }

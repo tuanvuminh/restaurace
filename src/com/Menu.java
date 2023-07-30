@@ -49,12 +49,12 @@ public class Menu {
                         dish.getTitle() + delimiter
                                 + dish.getPrice() + delimiter
                                 + dish.getPreparationTime() + delimiter
+                                + dish.getCategory() + delimiter
                                 + dish.getMainImage() + delimiter
-                                + dish.getCategory().toString()
                 );
             }
         } catch (IOException e) {
-            throw new OrderException("Chyba zápisu do souboru :" + filename + ": " + e.getLocalizedMessage());
+            throw new OrderException("Chyba při zápisu do souboru :" + filename + ": " + e.getLocalizedMessage());
         }
     }
 
@@ -87,7 +87,9 @@ public class Menu {
     public void printMenu() {
         System.out.println("Menu");
         for (Dish dish : menu) {
-            System.out.println("“" + dish.getCategory().toString() + "“ " + dish.getTitle() + ", cena: " + dish.getPrice() + " Kč");
+            System.out.println("“" + dish.getCategory().getDescription() + "“ "
+                    + dish.getTitle() + ", cena: " + dish.getPrice() + " Kč"
+            );
         }
     }
 }

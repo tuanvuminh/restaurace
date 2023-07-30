@@ -21,7 +21,7 @@ public class RestaurantManager {
         if (order.getDish().getOnMenu()) {
             orderList.add(order);
         } else {
-            System.err.println(order.getDish() + " Jídlo není v nabídce menu!");
+            System.err.println("Jídlo “" + order.getDish() + "“ není v nabídce menu!");
         }
     }
 
@@ -54,6 +54,8 @@ public class RestaurantManager {
             }
         } catch (IOException e) {
             throw new OrderException("Nepodařilo se nahrát data do souboru: " + fileName);
+        } catch (NullPointerException e) {
+            throw new OrderException("Některé objednávky stále nejsou uzavřené!");
         }
     }
 
@@ -129,28 +131,32 @@ public class RestaurantManager {
     }
 
     // 6.
-    public void getOrdersPerTable(Table table) {
-        if (table.getNumberOfTable() < 9) {
-            System.out.println("** Objednávky pro stůl č. " + " " + table.getNumberOfTable());
-        } else {
-            System.out.println("** Objednávky pro stůl č. " + table.getNumberOfTable());
-        }
-        System.out.println("*******");
-        for (Order order : orderList) {
-            if (order.getTable().getNumberOfTable() == table.getNumberOfTable()) {
-                System.out.println(order.getNumberOfOrder() + "." + " "
-                        + order.getDish() + " "
-                        + order.getNumberOfDishesIfMoreThenOne() + " " + "("
-                        + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
-                        + ":" + "\t"
-                        + order.formatTime(order.getOrderedTime())
-                        + "–"
-                        + order.formatTime(order.getFulfilmentTime()) + "\t"
-                        + "číšník č. " + order.getWaiter().getWaiterId()
-                );
+    public void getOrdersPerTable(Table table) throws OrderException {
+        try {
+            if (table.getNumberOfTable() < 9) {
+                System.out.println("** Objednávky pro stůl č. " + " " + table.getNumberOfTable());
+            } else {
+                System.out.println("** Objednávky pro stůl č. " + table.getNumberOfTable());
             }
+            System.out.println("*******");
+            for (Order order : orderList) {
+                if (order.getTable().getNumberOfTable() == table.getNumberOfTable()) {
+                    System.out.println(order.getNumberOfOrder() + "." + " "
+                            + order.getDish() + " "
+                            + order.getNumberOfDishesIfMoreThenOne() + " " + "("
+                            + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
+                            + ":" + "\t"
+                            + order.formatTime(order.getOrderedTime())
+                            + "–"
+                            + order.formatTime(order.getFulfilmentTime()) + "\t"
+                            + "číšník č. " + order.getWaiter().getWaiterId()
+                    );
+                }
+            }
+            System.out.println("*******");
+        } catch (NullPointerException e) {
+            throw new OrderException("Některé objednávky stále nejsou uzavřené!");
         }
-        System.out.println("*******");
     }
 }
 

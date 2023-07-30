@@ -12,8 +12,16 @@ public class Settings {
         return "menu.txt";
     }
 
-    public static  String filename3() {
+    public static String filename3() {
         return "cookbook.txt";
+    }
+
+    public static String filename4() {
+        return "new-cookbook.txt";
+    }
+
+    public static String filename5() {
+        return "new-menu.txt";
     }
 
     public static String delimiter () {

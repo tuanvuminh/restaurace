@@ -1,3 +1,3 @@
-kureci-rizek-01 hlavní jídlo: Kuřecí řízek obalovaný 150 g, čas přípravy: 30 minut
-blank hlavní jídlo: Hranolky 150g, čas přípravy: 15 minut
-pstruh-na-vine-01 hlavní jídlo: Pstruh na víně 200 g, čas přípravy: 35 minut
+Kuřecí řízek obalovaný 150 g	130	30	MAIN	blank	
+Hranolky 150g	50	15	MAIN	blank	
+Pstruh na víně 200 g	200	35	MAIN	pstruh-na-vine-05	

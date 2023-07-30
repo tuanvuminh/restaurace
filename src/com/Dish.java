@@ -12,28 +12,19 @@ public class Dish {
     private int preparationTime;
     private Category category;
     private String mainImage;
-    private List<String> images = new ArrayList<>();
     private Boolean isInCookBook = false;
     private Boolean isOnMenu = false;
 
-    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage) {
+    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage) throws OrderException {
         this.title = title;
         this.price = price;
-        this.preparationTime = preparationTime;
+        this.setPreparationTime(preparationTime);
         this.category = category;
         this.mainImage = mainImage;
     }
 
-    public Dish(String title, BigDecimal price, int preparationTime, Category category) {
+    public Dish(String title, BigDecimal price, int preparationTime, Category category) throws OrderException {
         this(title, price, preparationTime, category, "blank");
-    }
-
-    public void addImage(String mainImage) {
-        this.images.add(mainImage);
-    }
-
-    public void removeImage(String mainImage) {
-        this.images.remove(mainImage);
     }
 
     public String getTitle() {
@@ -56,7 +47,10 @@ public class Dish {
         return preparationTime;
     }
 
-    public void setPreparationTime(int preparationTime) {
+    public void setPreparationTime(int preparationTime) throws OrderException {
+        if (preparationTime <= 0) {
+            throw new OrderException("Zadaná hodnota musí být kladné číslo (zadáno: " + preparationTime + ")");
+        }
         this.preparationTime = preparationTime;
     }
 
@@ -72,16 +66,12 @@ public class Dish {
         return mainImage;
     }
 
-    public void setMainImage(String mainImage) {
+    public void addMainImage(String mainImage) {
         this.mainImage = mainImage;
     }
 
-    public List<String> getImages() {
-        return images;
-    }
-
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void removeMainImage() {
+        this.mainImage = "blank";
     }
 
     public Boolean getInCookBook() {
