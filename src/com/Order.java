@@ -1,3 +1,4 @@
+
 package com;
 
 import java.math.BigDecimal;
@@ -133,7 +134,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Objednávka č. " + numberOfOrder + " " + dish +" čas objednávky " + orderedTime;
+        return "Objednávka č. " + numberOfOrder + " " + dish + " čas objednávky " + orderedTime;
     }
 
     public String exportOrder() {
