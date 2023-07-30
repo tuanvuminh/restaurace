@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static java.awt.SystemColor.menu;
+
 public class Order {
     private static int orderCounter = 1;
     private int numberOfOrder= orderCounter++;
@@ -129,16 +131,22 @@ public class Order {
         return date.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-
-    public String exportOrder() {
-        return "" + dish + " " + "(" + (dish.getPrice().multiply(BigDecimal.valueOf(numberOfOrderedDishes))) + " Kč" + ")"
-                + ": " + formatTime(orderedTime) + "–"
-                + formatTime(fulfilmentTime)
-                + " číšník č. " + waiter.getWaiterId();
-    }
-
     @Override
     public String toString() {
         return "Objednávka č. " + numberOfOrder + " " + dish +" čas objednávky " + orderedTime;
+    }
+
+    public String exportOrder() {
+        return "Order{" +
+                "numberOfOrder=" + numberOfOrder +
+                ", table=" + table +
+                ", waiter=" + waiter +
+                ", dish=" + dish +
+                ", numberOfOrderedDishes=" + numberOfOrderedDishes +
+                ", orderedTime=" + orderedTime +
+                ", notesOfCustomer='" + notesOfCustomer + '\'' +
+                ", fulfilmentTime=" + fulfilmentTime +
+                ", totalPriceOfOrder=" + totalPriceOfOrder +
+                '}';
     }
 }

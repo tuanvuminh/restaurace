@@ -38,9 +38,19 @@ public class RestaurantManager {
     }
 
     public void saveToFile(String fileName, String delimiter) throws OrderException {
-        try (PrintWriter outputWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
             for (Order order : orderList) {
-                outputWriter.println(order.exportOrder());
+                writer.println(
+                        order.getNumberOfOrder() + "." + " "
+                                + order.getDish() + " "
+                                + order.getNumberOfDishesIfMoreThenOne() + " " + "("
+                                + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
+                                + ":" + "\t"
+                                + order.formatTime(order.getOrderedTime())
+                                + "–"
+                                + order.formatTime(order.getFulfilmentTime()) + "\t"
+                                + "číšník č. " + order.getWaiter().getWaiterId()
+                );
             }
         } catch (IOException e) {
             throw new OrderException("Nepodařilo se nahrát data do souboru: " + fileName);
@@ -114,6 +124,7 @@ public class RestaurantManager {
             if (order.getOrderedTime().getDayOfMonth() == LocalDateTime.now().getDayOfMonth())
                 orderedDishesOfToday.add(order.getDish());
         }
+        System.out.println("Seznam objednaných jídel z dnešního dne");
         orderedDishesOfToday.forEach(System.out::println);
     }
 

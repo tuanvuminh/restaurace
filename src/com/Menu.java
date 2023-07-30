@@ -84,7 +84,7 @@ public class Menu {
         }
     }
 
-    public void getMenu() {
+    public void printMenu() {
         System.out.println("Menu");
         for (Dish dish : menu) {
             System.out.println("“" + dish.getCategory().toString() + "“ " + dish.getTitle() + ", cena: " + dish.getPrice() + " Kč");
