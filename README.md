@@ -48,9 +48,6 @@ Požadované informace:
 4. Průměrnou dobu zpracování objednávek, které byly zadány v určitém časovém období.
 5. Seznam jídel, které byly dnes objednány. Bez ohledu na to, kolikrát byly objednány.
 6. Export seznamu objednávek pro jeden stůl ve formátu (například pro výpis na obrazovku):
-
-   
-** Objednávky pro stůl č.  4 **
 ****
 1. Kofola velká 4x (130 Kč):    15:25-15:29 číšník č. 3
 2. Pizza Grande (130 Kč):   15:29-16:10 číšník č. 4
