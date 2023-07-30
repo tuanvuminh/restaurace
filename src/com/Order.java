@@ -136,17 +136,4 @@ public class Order {
         return "Objednávka č. " + numberOfOrder + " " + dish +" čas objednávky " + orderedTime;
     }
 
-    public String exportOrder() {
-        return "Order{" +
-                "numberOfOrder=" + numberOfOrder +
-                ", table=" + table +
-                ", waiter=" + waiter +
-                ", dish=" + dish +
-                ", numberOfOrderedDishes=" + numberOfOrderedDishes +
-                ", orderedTime=" + orderedTime +
-                ", notesOfCustomer='" + notesOfCustomer + '\'' +
-                ", fulfilmentTime=" + fulfilmentTime +
-                ", totalPriceOfOrder=" + totalPriceOfOrder +
-                '}';
-    }
 }

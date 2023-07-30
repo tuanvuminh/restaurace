@@ -157,6 +157,7 @@ public class RestaurantManager {
             throw new OrderException("Některé objednávky stále nejsou uzavřené!");
         }
     }
+
 }
 
 

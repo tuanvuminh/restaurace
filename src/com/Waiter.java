@@ -19,4 +19,5 @@ public class Waiter {
     public String toString() {
         return "Čišník " + waiterId;
     }
+
 }

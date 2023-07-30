@@ -17,4 +17,5 @@ public class ListOfImages {
     public String getImage (Image image) {
         return "" + image;
     }
+
 }

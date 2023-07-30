@@ -76,8 +76,9 @@ public class CookBook extends Menu {
     public void printCookbook() {
         System.out.println("Zásobník jídel");
         for (Dish dish : dishes) {
-            System.out.println(dish.getMainImage() + " " + dish.getCategory().toString() + ": " + dish.getTitle() + ", čas přípravy: "
+            System.out.println(dish.getMainImage() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
                     + dish.getPreparationTime() + " minut");
         }
     }
+
 }

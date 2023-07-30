@@ -60,14 +60,12 @@ public class Main {
         cookBook.printCookbook();
 
         // První a třetí jídlo zařaď do aktuálního menu, druhé jídlo nikoli.
-
         System.out.println();
         menu.addDish(dish1);
         menu.addDish(dish3);
         menu.printMenu();
 
         // Vytvoř alespoň tři objednávky pro stůj číslo 15 a jednu pro stůj číslo 2. Objednávky řeší alespoň dva různí číšníci.
-
         Table table15 = new Table(15);
         Table table2 = new Table(2);
 
@@ -93,7 +91,6 @@ public class Main {
         restaurantManager.addOrder(order4);
 
         // Min. dvě objednávky jsou již uzavřené, minimálně dvě ještě nikoli.
-
         order1.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 11, 45)
         );
         order2.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 12, 45)
@@ -158,7 +155,6 @@ public class Main {
         }
 
         // 6. Změněná data ulož na disk. Po spuštění aplikace musí být data opět v pořádku načtena.
-
         try {
             restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
         } catch (OrderException e) {
@@ -179,11 +175,11 @@ public class Main {
 
         // 7. Připrav do složky projektu poškozený vstupní soubor/poškozené vstupní soubory, které se nepodaří načíst.
         //    Aplikace se při spuštění s těmito soubory musí zachovat korektně — nesmí spadnout..
-
         try {
             menu.loadFromFile(Settings.filename5(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu ze souboru! " + e.getLocalizedMessage());
         }
     }
+
 }
