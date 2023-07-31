@@ -1,8 +1,8 @@
-package com;
+package com.restaurant;
 
-import com.comparators.OrderTimeComparator;
-import com.comparators.OrderWaiterComparator;
-import com.exceptions.OrderException;
+import com.restaurant.comparators.OrderTimeComparator;
+import com.restaurant.exceptions.OrderException;
+import com.restaurant.comparators.OrderWaiterComparator;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -72,18 +72,12 @@ public class RestaurantManager {
 
     // 2.
     public void sortByTimeOfOrder() {
-        for (Order order : orderList) {
-            Collections.sort(orderList, new OrderTimeComparator());
-            System.out.println(orderList);
-        }
+        Collections.sort(orderList, new OrderTimeComparator());
     }
 
     public void sortByWaiterId() {
-        for (Order order : orderList) {
             Collections.sort(orderList, new OrderWaiterComparator());
-            System.out.println("Objednávky podle ID čišníků: " + orderList);
         }
-    }
 
     // 3.
     public String getInfoOfOrdersPerWaiter(Waiter waiter) {

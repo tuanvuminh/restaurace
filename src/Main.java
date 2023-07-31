@@ -1,12 +1,9 @@
-import com.*;
-import com.exceptions.OrderException;
-import com.settings.Settings;
+import com.restaurant.*;
+import com.restaurant.exceptions.OrderException;
+import com.restaurant.settings.Settings;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws OrderException {
@@ -34,12 +31,6 @@ public class Main {
             System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
         }
 
-        Image image1 = new Image("pstruh-na-vine-05");
-        Image image2 = new Image("kureci-rizek-05");
-        ListOfImages images = new ListOfImages();
-        images.addImage(image1);
-        images.addImage(image2);
-
         // 2. Připrav testovací data. Vlož do systému 3 jídla.
         Dish dish1 = new Dish("Kuřecí řízek obalovaný 150 g", BigDecimal.valueOf(130), 30, Category.MAIN, "kureci-rizek-01"
         );
@@ -52,7 +43,9 @@ public class Main {
         dish1.removeMainImage();
 
         //Přidání fotky
-        dish3.addMainImage(images.getImage(image1));
+        dish1.addOtherImage("kureci-rizek-01");
+        dish3.addMainImage("pstruh-na-vine-05");
+        dish3.addOtherImage("pstruh-na-vine-06");
 
         cookBook.addDish(dish1);
         cookBook.addDish(dish2);
@@ -125,12 +118,18 @@ public class Main {
         System.out.println();
         System.out.println(restaurantManager.getNumberOfUncompletedOrders());
 
-        // 5.2 Možnost seřadit objednávky podle číšníka nebo času zadání.
-        //restaurantManager.sortByTimeOfOrder();
-        //restaurantManager.sortByWaiterId();
-
+        // 5.2 Řazení objednávek
+        System.out.println();
+        System.out.println("Řazení objednávek podle času zadání:");
+        restaurantManager.sortByTimeOfOrder();
+        restaurantManager.getOrders().forEach(System.out::println);
+        System.out.println();
+        System.out.println("Řazení objednávek podle ID čišníků:");
+        restaurantManager.sortByWaiterId();
+        restaurantManager.getOrders().forEach(System.out::println);
 
         // 5.3 Celková cena objednávek pro jednotlivé číšníky (u každého číšníka bude počet jeho zadaných objednávek).
+        System.out.println();
         System.out.println(restaurantManager.getInfoOfOrdersPerWaiter(adam));
         System.out.println(restaurantManager.getInfoOfOrdersPerWaiter(erik));
 

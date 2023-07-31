@@ -1,6 +1,6 @@
-package com.comparators;
+package com.restaurant.comparators;
 
-import com.Order;
+import com.restaurant.Order;
 
 import java.util.Comparator;
 

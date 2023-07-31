@@ -1,10 +1,8 @@
-package com;
+package com.restaurant;
 
-import com.exceptions.OrderException;
+import com.restaurant.exceptions.OrderException;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Dish {
     private String title;
@@ -12,15 +10,21 @@ public class Dish {
     private int preparationTime;
     private Category category;
     private String mainImage;
+    private String otherImage;
     private Boolean isInCookBook = false;
     private Boolean isOnMenu = false;
 
-    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage) throws OrderException {
+    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage, String otherImage) throws OrderException {
         this.title = title;
         this.price = price;
         this.setPreparationTime(preparationTime);
         this.category = category;
         this.mainImage = mainImage;
+        this.otherImage = otherImage;
+    }
+
+    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage) throws OrderException {
+        this(title, price, preparationTime, category, mainImage, "");
     }
 
     public Dish(String title, BigDecimal price, int preparationTime, Category category) throws OrderException {
@@ -72,6 +76,26 @@ public class Dish {
 
     public void removeMainImage() {
         this.mainImage = "blank";
+    }
+
+    public void addOtherImage(String otherImage) {
+        this.otherImage = otherImage;
+    }
+
+    public void removeOtherImage() {
+        this.otherImage = "";
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public String getOtherImage() {
+        return otherImage;
+    }
+
+    public void setOtherImage(String otherImage) {
+        this.otherImage = otherImage;
     }
 
     public Boolean getInCookBook() {

@@ -1,4 +1,4 @@
-package com;
+package com.restaurant;
 
 public class Table {
     private int numberOfTable;

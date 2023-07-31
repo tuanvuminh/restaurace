@@ -1,4 +1,4 @@
-package com;
+package com.restaurant;
 
 public class Waiter {
     private int waiterId;

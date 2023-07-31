@@ -1,4 +1,4 @@
-package com.settings;
+package com.restaurant.settings;
 
 public class Settings {
 

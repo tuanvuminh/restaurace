@@ -1,12 +1,9 @@
-package com;
+package com.restaurant;
 
-import com.exceptions.OrderException;
-import com.settings.Settings;
+import com.restaurant.exceptions.OrderException;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -62,10 +59,10 @@ public class CookBook extends Menu {
             for (Dish dish : dishes) {
                 writer.println(
                         dish.getTitle() + delimiter
-                        + dish.getPrice() + delimiter
-                        + dish.getPreparationTime() + delimiter
-                        + dish.getCategory() +delimiter
-                        + dish.getMainImage() +delimiter
+                                + dish.getPrice() + delimiter
+                                + dish.getPreparationTime() + delimiter
+                                + dish.getCategory() + delimiter
+                                + dish.getMainImage() + delimiter
                 );
             }
         } catch (IOException e) {
@@ -76,8 +73,14 @@ public class CookBook extends Menu {
     public void printCookbook() {
         System.out.println("Zásobník jídel");
         for (Dish dish : dishes) {
-            System.out.println(dish.getMainImage() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
-                    + dish.getPreparationTime() + " minut");
+            if (dish.getOtherImage() != "") {
+                System.out.println(dish.getMainImage() + " " + dish.getOtherImage() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
+                        + dish.getPreparationTime() + " minut");
+            } else {
+                System.out.println(dish.getMainImage() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
+                        + dish.getPreparationTime() + " minut");
+            }
         }
     }
+
 }

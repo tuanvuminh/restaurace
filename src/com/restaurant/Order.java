@@ -1,10 +1,8 @@
-package com;
+package com.restaurant;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static java.awt.SystemColor.menu;
 
 public class Order {
     private static int orderCounter = 1;
@@ -133,6 +131,8 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Objednávka č. " + numberOfOrder + " " + dish +" čas objednávky " + orderedTime;
+        return "Objednávka č. " + numberOfOrder + " " + dish +" [čas objednávky: "
+                + formatTime(getOrderedTime()) + "] [čišník: č. "
+                + waiter.getWaiterId() + "]";
     }
 }

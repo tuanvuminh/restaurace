@@ -1,4 +1,4 @@
-package com;
+package com.restaurant;
 
 public enum Category {
     STARTER ("předkrm"), MAIN ("hlavní jídlo"), DESSERT ("dezert");
