@@ -28,7 +28,7 @@ public class Dish {
     }
 
     public Dish(String title, BigDecimal price, int preparationTime, Category category) throws OrderException {
-        this(title, price, preparationTime, category, "blank");
+        this(title, price, preparationTime, category, "blank", "blank");
     }
 
     public String getTitle() {
