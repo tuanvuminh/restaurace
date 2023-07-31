@@ -32,7 +32,7 @@ public class Main {
         }
 
         // 2. Připrav testovací data. Vlož do systému 3 jídla.
-        Dish dish1 = new Dish("Kuřecí řízek obalovaný 150 g", BigDecimal.valueOf(130), 30, Category.MAIN, "kureci-rizek-01"
+        Dish dish1 = new Dish("Kuřecí řízek obalovaný 150 g", BigDecimal.valueOf(130), 30, Category.MAIN, "kureci-rizek-01", "kureci-rizek-09"
         );
         Dish dish2 = new Dish("Hranolky 150g", BigDecimal.valueOf(50), 15, Category.MAIN
         );
@@ -41,8 +41,9 @@ public class Main {
 
         // Odebrání fotky
         dish1.removeMainImage();
+        dish1.removeOtherImage();
 
-        //Přidání fotky
+        // Přidání fotky
         dish1.addOtherImage("kureci-rizek-01");
         dish3.addMainImage("pstruh-na-vine-05");
         dish3.addOtherImage("pstruh-na-vine-06");
