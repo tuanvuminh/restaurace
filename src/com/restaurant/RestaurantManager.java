@@ -71,13 +71,9 @@ public class RestaurantManager {
     }
 
     // 2.
-    public void sortByTimeOfOrder() {
-            Collections.sort(orderList, new OrderTimeComparator());
+    public void sort(Comparator comparator) {
+            Collections.sort(orderList, comparator);
     }
-
-    public void sortByWaiterId() {
-            Collections.sort(orderList, new OrderWaiterComparator());
-        }
 
     // 3.
     public String getInfoOfOrdersPerWaiter(Waiter waiter) {

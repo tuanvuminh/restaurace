@@ -1,4 +1,6 @@
 import com.restaurant.*;
+import com.restaurant.comparators.OrderTimeComparator;
+import com.restaurant.comparators.OrderWaiterComparator;
 import com.restaurant.exceptions.OrderException;
 import com.restaurant.settings.Settings;
 
@@ -122,11 +124,11 @@ public class Main {
         // 5.2 Řazení objednávek
         System.out.println();
         System.out.println("Řazení objednávek podle času zadání:");
-        restaurantManager.sortByTimeOfOrder();
+        restaurantManager.sort(new OrderTimeComparator());
         restaurantManager.getOrders().forEach(System.out::println);
         System.out.println();
         System.out.println("Řazení objednávek podle ID čišníků:");
-        restaurantManager.sortByWaiterId();
+        restaurantManager.sort(new OrderWaiterComparator());
         restaurantManager.getOrders().forEach(System.out::println);
 
         // 5.3 Celková cena objednávek pro jednotlivé číšníky (u každého číšníka bude počet jeho zadaných objednávek).
