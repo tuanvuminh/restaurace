@@ -1,2 +1,2 @@
-Kuřecí řízek obalovaný 150 g	130	30	MAIN
-Pstruh na víně 200 g	200	35	MAIN	pstruh-na-vine-01
+Kuřecí řízek obalovaný 150 g	130	30	MAIN	blank	kureci-rizek-01
+Pstruh na víně 200 g	200	35	MAIN	pstruh-na-vine-05

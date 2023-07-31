@@ -49,6 +49,7 @@ public class Menu {
                                 + dish.getPreparationTime() + delimiter
                                 + dish.getCategory() + delimiter
                                 + dish.getMainImage() + delimiter
+                                + dish.getOtherImage() + delimiter
                 );
             }
         } catch (IOException e) {
@@ -65,7 +66,7 @@ public class Menu {
                 line = scanner.nextLine();
                 System.out.println(line);
                 items = line.split(delimiter);
-                if (items.length != 5)
+                if (items.length != 6)
                     throw new OrderException("Špatný počet položek na řádku: " + lineNumber + " " + line);
                 String title = items[0];
                 BigDecimal price = new BigDecimal(items[1]);
@@ -73,7 +74,9 @@ public class Menu {
                 Category category = Category.valueOf(items[3]);
                 String mainImage = items[4];
                 if (mainImage.isEmpty()) mainImage = "blank";
-                Dish newDish = new Dish(title, price, preparationTime, category, mainImage);
+                String otherImage = items[5];
+                if (otherImage.isEmpty()) otherImage = "";
+                Dish newDish = new Dish(title, price, preparationTime, category, mainImage, otherImage);
                 menu.add(newDish);
                 lineNumber++;
             }

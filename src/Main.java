@@ -103,7 +103,7 @@ public class Main {
         restaurantManager.addOrder(testOfOrderingADishWhichIsNotOnMenu);
 
         // 4. Uzavření objednávek
-        order3.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 16, 00)
+        order3.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 16, 15)
         );
         order4.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 16, 00)
         );
