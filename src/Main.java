@@ -136,6 +136,7 @@ public class Main {
 
         // 5.4 Průměrná doba zpracování objednávek, které byly zadány v určitém časovém období.
         System.out.println();
+
         try {
             System.out.println(restaurantManager.averageTimeOfOrdersToComplete());
         } catch (OrderException e) {
@@ -148,6 +149,7 @@ public class Main {
 
         // 5.6 Export seznamu objednávek pro jeden stůl ve formátu (například pro výpis na obrazovku):
         System.out.println();
+
         try {
             restaurantManager.getOrdersPerTable(table15);
         } catch (OrderException e) {
