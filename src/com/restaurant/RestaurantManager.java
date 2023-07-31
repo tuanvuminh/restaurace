@@ -72,7 +72,7 @@ public class RestaurantManager {
 
     // 2.
     public void sortByTimeOfOrder() {
-        Collections.sort(orderList, new OrderTimeComparator());
+            Collections.sort(orderList, new OrderTimeComparator());
     }
 
     public void sortByWaiterId() {
