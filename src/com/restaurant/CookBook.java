@@ -46,7 +46,7 @@ public class CookBook extends Menu {
                 String mainImage = items[4];
                 if (mainImage.isEmpty()) mainImage = "blank";
                 String otherImage = items[5];
-                if (otherImage.isEmpty()) otherImage = "";
+                if (otherImage.isEmpty()) otherImage = "blank";
                 Dish newDish = new Dish(title, price, preparationTime, category, mainImage, otherImage);
                 menu.add(newDish);
                 lineNumber++;

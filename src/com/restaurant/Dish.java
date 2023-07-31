@@ -24,7 +24,7 @@ public class Dish {
     }
 
     public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage) throws OrderException {
-        this(title, price, preparationTime, category, mainImage, "");
+        this(title, price, preparationTime, category, mainImage, "blank");
     }
 
     public Dish(String title, BigDecimal price, int preparationTime, Category category) throws OrderException {
@@ -83,7 +83,7 @@ public class Dish {
     }
 
     public void removeOtherImage() {
-        this.otherImage = "";
+        this.otherImage = "blank";
     }
 
     public void setMainImage(String mainImage) {

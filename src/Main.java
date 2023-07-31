@@ -48,6 +48,8 @@ public class Main {
         dish3.addMainImage("pstruh-na-vine-05");
         dish3.addOtherImage("pstruh-na-vine-06");
 
+        dish3.removeOtherImage();
+
         cookBook.addDish(dish1);
         cookBook.addDish(dish2);
         cookBook.addDish(dish3);
