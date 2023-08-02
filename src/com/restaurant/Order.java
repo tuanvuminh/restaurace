@@ -14,7 +14,6 @@ public class Order {
     private LocalDateTime orderedTime;
     private String notesOfCustomer;
     private LocalDateTime fulfilmentTime;
-    private BigDecimal totalPriceOfOrder;
 
     public Order(Table table, Waiter waiter, Dish dish, int numberOfOrderedDishes, LocalDateTime orderedTime, String notesOfCustomer) {
         this.table = table;
