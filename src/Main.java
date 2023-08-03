@@ -178,7 +178,7 @@ public class Main {
         }
 
         // 7. Připrav do složky projektu poškozený vstupní soubor/poškozené vstupní soubory, které se nepodaří načíst.
-        //    Aplikace se při spuštění s těmito soubory musí zachovat korektně — nesmí spadnout..
+        // 8. Aplikace se při spuštění s těmito soubory musí zachovat korektně — nesmí spadnout..
         try {
             menu.loadFromFile(Settings.filename5(), Settings.delimiter());
         } catch (OrderException e) {
