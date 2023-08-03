@@ -87,14 +87,3 @@ V metodě main pak zavolej jednotlivé metody a u každé uveď v komentáři č
 
 7. Připrav do složky projektu poškozený vstupní soubor/poškozené vstupní soubory, které se nepodaří načíst. Aplikace se při spuštění s těmito soubory musí zachovat korektně — nesmí spadnout..
 8. Pokud tyto soubory posléze smažeme, aplikace musí fungovat a můžeme pokračovat v testování.
-# Výzvy pro zájemce
-
-Pokud chceš, můžeš si zkusit něco navíc (ale je to dobrovolné — nemusíš):
-
-9. Možnost přidávat či odebírat kategorie jídel.
-10. Jídlo může být ve více kategoriích zároveň.
-11. Objednávku pro stůl lze uzavřít (close) až v okamžiku, kdy jsou všechny položky (item) zaplaceny.
-12. Objednávky od jednoho stolu by měly jít převést k jinému stolu, když si hosté přesednou. Dokonce si mohou přisednout k hostům u jiného stolu. (Dále už nemusí jít v systému rozlišit, které objednávky jsou převedeny, přesun tedy nemusí být vratná operace.)
-
-
-
