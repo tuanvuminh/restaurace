@@ -3,6 +3,8 @@ package com.restaurant;
 import com.restaurant.exceptions.OrderException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dish {
     private String title;
@@ -10,24 +12,54 @@ public class Dish {
     private Integer preparationTime;
     private Category category;
     private String mainImage;
-    private String otherImage;
+    private List<String> images = new ArrayList<>();
+    private Boolean isInCookBook = false;
+    private Boolean isOnMenu = false;
 
-    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage, String otherImage) throws OrderException {
+    public Dish(String title) {
+        this.title = title;
+    }
+
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage, List<String> images) {
+        this.title = title;
+        this.price = price;
+        this.preparationTime = preparationTime;
+        this.category = category;
+        this.mainImage = mainImage;
+        this.images = images;
+    }
+
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage) throws OrderException  {
         this.title = title;
         this.price = price;
         this.setPreparationTime(preparationTime);
         this.category = category;
         this.mainImage = mainImage;
-        this.otherImage = otherImage;
     }
 
-    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage) throws OrderException {
-        this(title, price, preparationTime, category, mainImage, "blank");
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category) {
+        this.title = title;
+        this.price = price;
+        this.preparationTime = preparationTime;
+        this.category = category;
+        this.mainImage = "blank";
     }
 
-    public Dish(String title, BigDecimal price, Integer preparationTime, Category category) throws OrderException {
-        this(title, price, preparationTime, category, "blank", "blank");
+    // Metody přidání a smazáni obrázků
+
+    public void removeMainImage() {
+        this.mainImage = "blank";
     }
+
+    public void addImageToList(String image) {
+        images.add(image);
+    }
+
+    public void removeImageFromList(String image) {
+        images.remove(image);
+    }
+
+    // Gettery a settery
 
     public String getTitle() {
         return title;
@@ -49,10 +81,7 @@ public class Dish {
         return preparationTime;
     }
 
-    public void setPreparationTime(Integer preparationTime) throws OrderException {
-        if (preparationTime <= 0) {
-            throw new OrderException("Zadaná hodnota musí být kladné číslo (zadáno: " + preparationTime + ")");
-        }
+    public void setPreparationTime(Integer preparationTime) {
         this.preparationTime = preparationTime;
     }
 
@@ -68,32 +97,32 @@ public class Dish {
         return mainImage;
     }
 
-    public void addMainImage(String mainImage) {
-        this.mainImage = mainImage;
-    }
-
-    public void removeMainImage() {
-        this.mainImage = "blank";
-    }
-
-    public void addOtherImage(String otherImage) {
-        this.otherImage = otherImage;
-    }
-
-    public void removeOtherImage() {
-        this.otherImage = "blank";
-    }
-
     public void setMainImage(String mainImage) {
         this.mainImage = mainImage;
     }
 
-    public String getOtherImage() {
-        return otherImage;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setOtherImage(String otherImage) {
-        this.otherImage = otherImage;
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public Boolean getInCookBook() {
+        return isInCookBook;
+    }
+
+    public void setInCookBook(Boolean inCookBook) {
+        isInCookBook = inCookBook;
+    }
+
+    public Boolean getOnMenu() {
+        return isOnMenu;
+    }
+
+    public void setOnMenu(Boolean onMenu) {
+        isOnMenu = onMenu;
     }
 
     @Override
