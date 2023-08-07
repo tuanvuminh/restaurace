@@ -1,21 +1,15 @@
 package com.restaurant;
 
-import com.restaurant.comparators.OrderTimeComparator;
 import com.restaurant.exceptions.OrderException;
-import com.restaurant.comparators.OrderWaiterComparator;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class RestaurantManager {
+public class RestaurantManager extends Menu{
     private List<Order> orderList = new ArrayList<>();
-    private Set<Dish> orderedDishesOfToday = new HashSet<>();
 
     public void addOrder(Order order) {
         if (order.getDish().getOnMenu()) {
@@ -37,19 +31,46 @@ public class RestaurantManager {
         this.orderList = orderList;
     }
 
+    public void loadFromFile(String fileName, String delimiter) throws OrderException {
+        String[] items = new String[0];
+        String line = "";
+        int lineNumber = 1;
+        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(fileName)))) {
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                System.out.println(line);
+                items = line.split(delimiter);
+                if (items.length != 7)
+                    throw new OrderException("Špatný počet položek na řádku: " + lineNumber + " " + line);
+                Integer numberOfOrder = Integer.valueOf(items[0]);
+                Integer tableNumber = Integer.valueOf(items[1]);
+                Waiter waiter = new Waiter(Integer.valueOf(items[2]));
+                Dish dish = new Dish(items[3]);
+                Integer numberOfOrderedDishes = Integer.valueOf(items[4]);
+                LocalDateTime orderedTime = LocalDateTime.parse(items[6]);
+                LocalDateTime fulfilmentTime = LocalDateTime.parse(items[7]);
+                Order newOrder = new Order(numberOfOrder, tableNumber, waiter, dish, numberOfOrderedDishes,
+                        orderedTime, fulfilmentTime);
+                orderList.add(newOrder);
+                lineNumber++;
+            }
+        } catch (FileNotFoundException e) {
+            throw new OrderException("Soubor: " + fileName + " nebyl nalezen! " + e.getLocalizedMessage());
+        }
+    }
+
     public void saveToFile(String fileName, String delimiter) throws OrderException {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
             for (Order order : orderList) {
                 writer.println(
-                        order.getNumberOfOrder() + "." + " "
-                                + order.getDish() + " "
-                                + order.getNumberOfDishesIfMoreThenOne() + " " + "("
-                                + (order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes()))) + " Kč" + ")"
-                                + ":" + "\t"
-                                + order.formatTime(order.getOrderedTime())
-                                + "–"
-                                + order.formatTime(order.getFulfilmentTime()) + "\t"
-                                + "číšník č. " + order.getWaiter().getWaiterId()
+                        order.getNumberOfOrder() + delimiter
+                                + order.getTableNumber() + delimiter
+                                + order.getWaiter().getWaiterId() + delimiter
+                                + order.getDish() + delimiter
+                                + order.getNumberOfOrderedDishes() + delimiter
+                                + order.formatTime(order.getOrderedTime()) + delimiter
+                                + order.formatTime(order.getFulfilmentTime()) + delimiter
+
                 );
             }
         } catch (IOException e) {
@@ -80,7 +101,7 @@ public class RestaurantManager {
         BigDecimal totalPrice = BigDecimal.ZERO;
         int numberOfOrders = 0;
         for (Order order : orderList) {
-            if (order.getWaiter() == waiter) {
+            if (order.getWaiter().equals(waiter)) {
                 numberOfOrders++;
                 totalPrice = totalPrice.add(order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes())));
             }
@@ -93,17 +114,15 @@ public class RestaurantManager {
         long timeToCompleteOrder = 0;
         long timeToCompleteAllOrders = 0;
         int numberOfOrders = 0;
-        long averageTimeOfOrdersToComplete = 0;
         try {
             for (Order order : orderList) {
-                if (order.getFulfilmentTime() == order.getFulfilmentTime()) {
+                if (!(order.getFulfilmentTime() == null)) {
                     numberOfOrders++;
                     timeToCompleteOrder = ChronoUnit.MINUTES.between(order.getOrderedTime(), order.getFulfilmentTime());
                     timeToCompleteAllOrders = timeToCompleteAllOrders + timeToCompleteOrder;
-                    averageTimeOfOrdersToComplete = timeToCompleteAllOrders / numberOfOrders;
                 }
             }
-            return "Průměrná doba zpracování všech objednávek: " + averageTimeOfOrdersToComplete + " minut";
+            return "Průměrná doba zpracování všech objednávek: " + timeToCompleteAllOrders / numberOfOrders + " minut";
         } catch (NullPointerException e) {
             throw new OrderException("Některé objednávky stále nejsou uzavřené!");
         }
@@ -111,6 +130,7 @@ public class RestaurantManager {
 
     // 5.
     public void getOrderedDishesOfToday() {
+        Set<Dish> orderedDishesOfToday = new HashSet<>();
         for (Order order : orderList) {
             if (order.getOrderedTime().getDayOfMonth() == LocalDateTime.now().getDayOfMonth())
                 orderedDishesOfToday.add(order.getDish());
@@ -120,16 +140,16 @@ public class RestaurantManager {
     }
 
     // 6.
-    public void getOrdersPerTable(Table table) throws OrderException {
+    public void getOrdersPerTable(Integer tableNumber) throws OrderException {
         try {
-            if (table.getNumberOfTable() < 9) {
-                System.out.println("** Objednávky pro stůl č. " + " " + table.getNumberOfTable());
+            if (tableNumber < 9) {
+                System.out.println("** Objednávky pro stůl č. " + " " + tableNumber);
             } else {
-                System.out.println("** Objednávky pro stůl č. " + table.getNumberOfTable());
+                System.out.println("** Objednávky pro stůl č. " + tableNumber);
             }
             System.out.println("*******");
             for (Order order : orderList) {
-                if (order.getTable().getNumberOfTable() == table.getNumberOfTable()) {
+                if (order.getTableNumber() == tableNumber) {
                     System.out.println(order.getNumberOfOrder() + "." + " "
                             + order.getDish() + " "
                             + order.getNumberOfDishesIfMoreThenOne() + " " + "("
