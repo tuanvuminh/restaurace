@@ -1,17 +1,17 @@
 package com.restaurant;
 
 public class Waiter {
-    private int waiterId;
+    private Integer waiterId;
 
-    public Waiter(int waiterId) {
+    public Waiter(Integer waiterId) {
         this.waiterId = waiterId;
     }
 
-    public int getWaiterId() {
+    public Integer getWaiterId() {
         return waiterId;
     }
 
-    public void setWaiterId(int waiterId) {
+    public void setWaiterId(Integer waiterId) {
         this.waiterId = waiterId;
     }
 
