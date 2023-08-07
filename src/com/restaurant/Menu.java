@@ -28,7 +28,7 @@ public class Menu extends CookBook {
     }
 
     public void removeAllDishes() {
-        menu.removeAll(menu);
+        menu.clear();
     }
 
     public void addDish(Dish dish) {
@@ -48,7 +48,7 @@ public class Menu extends CookBook {
                                 + dish.getPrice() + delimiter
                                 + dish.getPreparationTime() + delimiter
                                 + dish.getCategory() + delimiter
-                                + dish.getMainImage() + delimiter
+                                + dish.getImages() + delimiter
                 );
             }
         } catch (IOException e) {
@@ -71,8 +71,8 @@ public class Menu extends CookBook {
                 BigDecimal price = new BigDecimal(items[1]);
                 Integer preparationTime = Integer.valueOf(items[2]);
                 Category category = Category.valueOf(items[3]);
-                String mainImage = items[4];
-                Dish newDish = new Dish(title, price, preparationTime, category, mainImage);
+                List images = List.of(items[4]);
+                Dish newDish = new Dish(title, price, preparationTime, category, images);
                 menu.add(newDish);
                 lineNumber++;
             }
