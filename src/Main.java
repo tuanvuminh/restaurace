@@ -11,44 +11,43 @@ public class Main {
     public static void main(String[] args) throws OrderException {
 
         // 1. Testovací scénář
-        RestaurantManager restaurantManager = new RestaurantManager();
         CookBook cookBook = new CookBook();
         Menu menu = new Menu();
+        RestaurantManager restaurantManager = new RestaurantManager();
 
         try {
-            restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
+            restaurantManager.loadFromFile(Settings.filenameTest(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu ze souboru!" + e.getLocalizedMessage());
         }
 
         try {
-            menu.saveToFile(Settings.filename2(), Settings.delimiter());
+            menu.loadFromFile(Settings.filenameTest(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu ze souboru!" + e.getLocalizedMessage());
         }
 
         try {
-            cookBook.saveToFile(Settings.filename3(), Settings.delimiter());
+            cookBook.loadFromFile(Settings.filenameTest(), Settings.delimiter());
         } catch (OrderException e) {
-            System.err.println("Chyba při zápisu do souboru!" + e.getLocalizedMessage());
+            System.err.println("Chyba při zápisu ze souboru!" + e.getLocalizedMessage());
         }
 
         // 2. Připrav testovací data. Vlož do systému 3 jídla.
-        Dish dish1 = new Dish("Kuřecí řízek obalovaný 150 g", BigDecimal.valueOf(130), 30, Category.MAIN, "kureci-rizek-01", "kureci-rizek-09"
+        Dish dish1 = new Dish("Kuřecí řízek obalovaný 150 g", BigDecimal.valueOf(130), 30, Category.MAIN, "kureci-rizek-01"
         );
         Dish dish2 = new Dish("Hranolky 150g", BigDecimal.valueOf(50), 15, Category.MAIN
         );
-        Dish dish3 = new Dish("Pstruh na víně 200 g", BigDecimal.valueOf(200), 35, Category.MAIN, "pstruh-na-vine-01"
+        Dish dish3 = new Dish("Pstruh na víně 200 g", BigDecimal.valueOf(200), 35, Category.MAIN, "pstruh-01"
         );
 
-        // Odebrání fotky
-        dish1.removeMainImage();
-        dish1.removeOtherImage();
-
         // Přidání fotky
-        dish1.addOtherImage("kureci-rizek-01");
-        dish3.addMainImage("pstruh-na-vine-05");
-        dish3.addOtherImage("pstruh-na-vine-06");
+        dish1.addImageToList("kureci-rizek-02");
+        dish1.addImageToList("kureci-rizek-03");
+
+        // Odebrání fotek
+        dish1.removeImageFromList("kureci-rizek-03");
+        dish1.removeMainImage();
 
         cookBook.addDish(dish1);
         cookBook.addDish(dish2);
@@ -62,22 +61,19 @@ public class Main {
         menu.printMenu();
 
         // Vytvoř alespoň tři objednávky pro stůj číslo 15 a jednu pro stůj číslo 2. Objednávky řeší alespoň dva různí číšníci.
-        Table table15 = new Table(15);
-        Table table2 = new Table(2);
-
         Waiter adam = new Waiter(1);
         Waiter erik = new Waiter(2);
 
-        Order order1 = new Order(table15, adam, dish1, LocalDateTime.of(2023, 7,
+        Order order1 = new Order(15, adam, dish1, LocalDateTime.of(2023, 7,
                 LocalDateTime.now().getDayOfMonth(), 11, 00)
         );
-        Order order2 = new Order(table15, adam, dish1, LocalDateTime.of(2023, 7,
+        Order order2 = new Order(15, adam, dish1, LocalDateTime.of(2023, 7,
                 LocalDateTime.now().getDayOfMonth(), 12, 00)
         );
-        Order order3 = new Order(table15, erik, dish3, 3, LocalDateTime.of(2023, 7,
+        Order order3 = new Order(15, erik, dish3, 3, LocalDateTime.of(2023, 7,
                 LocalDateTime.now().getDayOfMonth(), 15, 00)
         );
-        Order order4 = new Order(table2, adam, dish3, 2, LocalDateTime.of(2023, 7,
+        Order order4 = new Order(2, adam, dish3, 2, LocalDateTime.of(2023, 7,
                 LocalDateTime.now().getDayOfMonth(), 15, 00)
         );
 
@@ -94,15 +90,16 @@ public class Main {
 
         // Test uložení neuzavřených objednávek do souboru
         try {
-            restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
+            restaurantManager.saveToFile(Settings.filenameOrders(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
         // 3. Vyzkoušej přidat objednávku jídla, které není v menu — aplikace musí ohlásit chybu.
-        Order testOfOrderingADishWhichIsNotOnMenu = new Order(table15, erik, dish2, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 00)
+        Order testOfOrderingADishWhichIsNotOnMenu = new Order(15, erik, dish2, LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 15, 00)
         );
         restaurantManager.addOrder(testOfOrderingADishWhichIsNotOnMenu);
+
 
         // 4. Uzavření objednávek
         order3.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 16, 15)
@@ -111,7 +108,7 @@ public class Main {
         );
 
         try {
-            restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
+            restaurantManager.saveToFile(Settings.filenameOrders(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
@@ -153,26 +150,26 @@ public class Main {
         System.out.println();
 
         try {
-            restaurantManager.getOrdersPerTable(table15);
+            restaurantManager.getOrdersPerTable(15);
         } catch (OrderException e) {
             System.err.println(e.getLocalizedMessage());
         }
 
         // 6. Změněná data ulož na disk. Po spuštění aplikace musí být data opět v pořádku načtena.
         try {
-            restaurantManager.saveToFile(Settings.filename1(), Settings.delimiter());
+            restaurantManager.saveToFile(Settings.filenameOrders(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
         try {
-            menu.saveToFile(Settings.filename2(), Settings.delimiter());
+            menu.saveToFile(Settings.filenameMenu(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
 
         try {
-            cookBook.saveToFile(Settings.filename3(), Settings.delimiter());
+            cookBook.saveToFile(Settings.filenameCookbook(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu do souboru! " + e.getLocalizedMessage());
         }
@@ -180,7 +177,7 @@ public class Main {
         // 7. Připrav do složky projektu poškozený vstupní soubor/poškozené vstupní soubory, které se nepodaří načíst.
         // 8. Aplikace se při spuštění s těmito soubory musí zachovat korektně — nesmí spadnout..
         try {
-            menu.loadFromFile(Settings.filename5(), Settings.delimiter());
+            menu.loadFromFile(Settings.filenameNewMenu(), Settings.delimiter());
         } catch (OrderException e) {
             System.err.println("Chyba při zápisu ze souboru! " + e.getLocalizedMessage());
         }

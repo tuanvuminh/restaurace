@@ -44,8 +44,9 @@ public class CookBook {
                 BigDecimal price = new BigDecimal(items[1]);
                 Integer preparationTime = Integer.valueOf(items[2]);
                 Category category = Category.valueOf(items[3]);
-                List images = List.of(items[4]);
-                Dish newDish = new Dish(title, price, preparationTime, category, images);
+                String mainImage = items[4];
+                List images = List.of(items[5]);
+                Dish newDish = new Dish(title, price, preparationTime, category, mainImage, images);
                 cookBook.add(newDish);
                 lineNumber++;
             }
@@ -62,6 +63,7 @@ public class CookBook {
                                 + dish.getPrice() + delimiter
                                 + dish.getPreparationTime() + delimiter
                                 + dish.getCategory() + delimiter
+                                + dish.getMainImage() + delimiter
                                 + dish.getImages() + delimiter
                 );
             }
@@ -73,7 +75,7 @@ public class CookBook {
     public void printCookbook() {
         System.out.println("Zásobník jídel");
         for (Dish dish : cookBook) {
-            System.out.println(dish.getImages() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
+            System.out.println(dish.getMainImage() + " " + dish.getImages() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
                     + dish.getPreparationTime() + " minut");
         }
     }

@@ -48,6 +48,7 @@ public class Menu extends CookBook {
                                 + dish.getPrice() + delimiter
                                 + dish.getPreparationTime() + delimiter
                                 + dish.getCategory() + delimiter
+                                + dish.getMainImage() + delimiter
                                 + dish.getImages() + delimiter
                 );
             }
@@ -71,8 +72,9 @@ public class Menu extends CookBook {
                 BigDecimal price = new BigDecimal(items[1]);
                 Integer preparationTime = Integer.valueOf(items[2]);
                 Category category = Category.valueOf(items[3]);
-                List images = List.of(items[4]);
-                Dish newDish = new Dish(title, price, preparationTime, category, images);
+                String mainImage = items[4];
+                List images = List.of(items[5]);
+                Dish newDish = new Dish(title, price, preparationTime, category, mainImage, images);
                 menu.add(newDish);
                 lineNumber++;
             }
