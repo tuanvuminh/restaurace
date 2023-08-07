@@ -2,6 +2,11 @@ package com.restaurant.settings;
 
 public class Settings {
 
+    public static String filenameTest() {
+
+        return "test.txt";
+    }
+
     public static String filenameOrders() {
 
         return "orders.txt";
