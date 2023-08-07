@@ -1,22 +1,25 @@
 package com.restaurant;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Order {
     private static int orderCounter = 1;
-    private int numberOfOrder= orderCounter++;
-    private Table table;
+    private Integer numberOfOrder= orderCounter++;
+    private Integer tableNumber;
     private Waiter waiter;
     private Dish dish;
-    private int numberOfOrderedDishes;
+    private Integer numberOfOrderedDishes;
     private LocalDateTime orderedTime;
     private String notesOfCustomer;
     private LocalDateTime fulfilmentTime;
 
-    public Order(Table table, Waiter waiter, Dish dish, int numberOfOrderedDishes, LocalDateTime orderedTime, String notesOfCustomer) {
-        this.table = table;
+    public Order(Integer numberOfOrder, Integer tableNumber, Waiter waiter, Dish dish, Integer numberOfOrderedDishes,
+                 LocalDateTime orderedTime, LocalDateTime fulfilmentTime) {
+    }
+
+    public Order(Integer tableNumber, Waiter waiter, Dish dish, Integer numberOfOrderedDishes, LocalDateTime orderedTime, String notesOfCustomer) {
+        this.tableNumber = tableNumber;
         this.waiter = waiter;
         this.dish = dish;
         this.numberOfOrderedDishes = numberOfOrderedDishes;
@@ -24,24 +27,24 @@ public class Order {
         this.notesOfCustomer = notesOfCustomer;
     }
 
-    public Order(Table table, Waiter waiter, Dish dish, LocalDateTime orderedTime) {
-        this(table, waiter, dish, 1, orderedTime, "");
+    public Order(Integer tableNumber, Waiter waiter, Dish dish, LocalDateTime orderedTime) {
+        this(tableNumber, waiter, dish, 1, orderedTime, "");
     }
 
-    public Order(Table table, Waiter waiter, Dish dish, LocalDateTime orderedTime, String notesOfCustomer) {
-        this(table, waiter, dish, 1, orderedTime, notesOfCustomer);
+    public Order(Integer tableNumber, Waiter waiter, Dish dish, LocalDateTime orderedTime, String notesOfCustomer) {
+        this(tableNumber, waiter, dish, 1, orderedTime, notesOfCustomer);
     }
 
-    public Order(Table table, Waiter waiter, Dish dish, int numberOfOrderedDishes, LocalDateTime orderedTime) {
-        this(table, waiter, dish, numberOfOrderedDishes, orderedTime, "");
+    public Order(Integer tableNumber, Waiter waiter, Dish dish, Integer numberOfOrderedDishes, LocalDateTime orderedTime) {
+        this(tableNumber, waiter, dish, numberOfOrderedDishes, orderedTime, "");
     }
 
-    public Table getTable() {
-        return table;
+    public Integer getTableNumber() {
+        return tableNumber;
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 
     public Waiter getWaiter() {
@@ -60,19 +63,19 @@ public class Order {
         this.dish = dish;
     }
 
-    public static int getOrderCounter() {
+    public static Integer getOrderCounter() {
         return orderCounter;
     }
 
-    public static void setOrderCounter(int orderCounter) {
+    public static void setOrderCounter(Integer orderCounter) {
         Order.orderCounter = orderCounter;
     }
 
-    public int getNumberOfOrder() {
+    public Integer getNumberOfOrder() {
         return numberOfOrder;
     }
 
-    public void setNumberOfOrder(int numberOfOrder) {
+    public void setNumberOfOrder(Integer numberOfOrder) {
         this.numberOfOrder = numberOfOrder;
     }
 
@@ -100,7 +103,7 @@ public class Order {
         this.fulfilmentTime = fulfilmentTime;
     }
 
-    public int getNumberOfOrderedDishes() {
+    public Integer getNumberOfOrderedDishes() {
         return numberOfOrderedDishes;
     }
 
@@ -114,14 +117,6 @@ public class Order {
 
     public void setNumberOfOrderedDishes(int numberOfOrderedDishes) {
         this.numberOfOrderedDishes = numberOfOrderedDishes;
-    }
-
-    public BigDecimal getTotalPriceOfOrder() {
-        return totalPriceOfOrder;
-    }
-
-    public void setTotalPriceOfOrder(BigDecimal totalPriceOfOrder) {
-        this.totalPriceOfOrder = totalPriceOfOrder;
     }
 
     public String formatTime(LocalDateTime date) {
