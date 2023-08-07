@@ -11,8 +11,6 @@ public class Dish {
     private Category category;
     private String mainImage;
     private String otherImage;
-    private Boolean isInCookBook = false;
-    private Boolean isOnMenu = false;
 
     public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage, String otherImage) throws OrderException {
         this.title = title;
@@ -96,22 +94,6 @@ public class Dish {
 
     public void setOtherImage(String otherImage) {
         this.otherImage = otherImage;
-    }
-
-    public Boolean getInCookBook() {
-        return isInCookBook;
-    }
-
-    public void setInCookBook(Boolean inCookBook) {
-        isInCookBook = inCookBook;
-    }
-
-    public Boolean getOnMenu() {
-        return isOnMenu;
-    }
-
-    public void setOnMenu(Boolean onMenu) {
-        isOnMenu = onMenu;
     }
 
     @Override
