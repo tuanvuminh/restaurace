@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 public class Dish {
     private String title;
     private BigDecimal price;
-    private int preparationTime;
+    private Integer preparationTime;
     private Category category;
     private String mainImage;
     private String otherImage;
     private Boolean isInCookBook = false;
     private Boolean isOnMenu = false;
 
-    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage, String otherImage) throws OrderException {
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage, String otherImage) throws OrderException {
         this.title = title;
         this.price = price;
         this.setPreparationTime(preparationTime);
@@ -23,11 +23,11 @@ public class Dish {
         this.otherImage = otherImage;
     }
 
-    public Dish(String title, BigDecimal price, int preparationTime, Category category, String mainImage) throws OrderException {
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage) throws OrderException {
         this(title, price, preparationTime, category, mainImage, "blank");
     }
 
-    public Dish(String title, BigDecimal price, int preparationTime, Category category) throws OrderException {
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category) throws OrderException {
         this(title, price, preparationTime, category, "blank", "blank");
     }
 
@@ -47,11 +47,11 @@ public class Dish {
         this.price = price;
     }
 
-    public int getPreparationTime() {
+    public Integer getPreparationTime() {
         return preparationTime;
     }
 
-    public void setPreparationTime(int preparationTime) throws OrderException {
+    public void setPreparationTime(Integer preparationTime) throws OrderException {
         if (preparationTime <= 0) {
             throw new OrderException("Zadaná hodnota musí být kladné číslo (zadáno: " + preparationTime + ")");
         }
