@@ -2,25 +2,25 @@ package com.restaurant.settings;
 
 public class Settings {
 
-    public static String filename1() {
+    public static String filenameOrders() {
 
         return "orders.txt";
     }
 
-    public static String filename2() {
+    public static String filenameMenu() {
 
         return "menu.txt";
     }
 
-    public static String filename3() {
+    public static String filenameCookbook() {
         return "cookbook.txt";
     }
 
-    public static String filename4() {
+    public static String filenameNewCookbook() {
         return "new-cookbook.txt";
     }
 
-    public static String filename5() {
+    public static String filenameNewMenu() {
         return "new-menu.txt";
     }
 
