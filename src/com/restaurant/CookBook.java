@@ -8,25 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CookBook extends Menu {
-    private List<Dish> dishes = new ArrayList<>();
+public class CookBook {
+    private List<Dish> cookBook = new ArrayList<>();
 
     public void addDish(Dish dish) {
-        dishes.add(dish);
+        cookBook.add(dish);
         dish.setInCookBook(true);
     }
 
     public void removeDish(Dish dish) {
-        dishes.remove(dish);
+        cookBook.remove(dish);
     }
 
     public void removeAll() {
-        dishes.removeAll(dishes);
+        cookBook.removeAll(cookBook);
     }
 
     public void getDish(int index) {
-        dishes.get(index);
+        cookBook.get(index);
     }
+
 
     public void loadFromFile(String filename, String delimiter) throws OrderException {
         String[] items = new String[0];
@@ -41,14 +42,11 @@ public class CookBook extends Menu {
                     throw new OrderException("Špatný počet položek na řádku: " + lineNumber + " " + line);
                 String title = items[0];
                 BigDecimal price = new BigDecimal(items[1]);
-                int preparationTime = Integer.parseInt(items[2]);
+                Integer preparationTime = Integer.valueOf(items[2]);
                 Category category = Category.valueOf(items[3]);
                 String mainImage = items[4];
-                if (mainImage.isEmpty()) mainImage = "blank";
-                String otherImage = items[5];
-                if (otherImage.isEmpty()) otherImage = "blank";
-                Dish newDish = new Dish(title, price, preparationTime, category, mainImage, otherImage);
-                menu.add(newDish);
+                Dish newDish = new Dish(title, price, preparationTime, category, mainImage);
+                cookBook.add(newDish);
                 lineNumber++;
             }
         } catch (FileNotFoundException e) {
@@ -58,14 +56,13 @@ public class CookBook extends Menu {
 
     public void saveToFile(String filename, String delimiter) throws OrderException {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)))) {
-            for (Dish dish : dishes) {
+            for (Dish dish : cookBook) {
                 writer.println(
                         dish.getTitle() + delimiter
                                 + dish.getPrice() + delimiter
                                 + dish.getPreparationTime() + delimiter
                                 + dish.getCategory() + delimiter
                                 + dish.getMainImage() + delimiter
-                                + dish.getOtherImage() + delimiter
                 );
             }
         } catch (IOException e) {
@@ -75,15 +72,13 @@ public class CookBook extends Menu {
 
     public void printCookbook() {
         System.out.println("Zásobník jídel");
-        for (Dish dish : dishes) {
-            if (dish.getOtherImage() != "") {
-                System.out.println(dish.getMainImage() + " " + dish.getOtherImage() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
-                        + dish.getPreparationTime() + " minut");
-            } else {
-                System.out.println(dish.getMainImage() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
-                        + dish.getPreparationTime() + " minut");
-            }
+        for (Dish dish : cookBook) {
+            System.out.println(dish.getMainImage() + " " +dish.getImages() + " " + dish.getCategory().getDescription() + ": " + dish.getTitle() + ", čas přípravy: "
+                    + dish.getPreparationTime() + " minut");
         }
     }
 
+
 }
+
+

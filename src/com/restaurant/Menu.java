@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu extends CookBook {
     List<Dish> menu = new ArrayList<>();
 
     public List<Dish> getDishes() {
@@ -49,7 +49,6 @@ public class Menu {
                                 + dish.getPreparationTime() + delimiter
                                 + dish.getCategory() + delimiter
                                 + dish.getMainImage() + delimiter
-                                + dish.getOtherImage() + delimiter
                 );
             }
         } catch (IOException e) {
@@ -70,13 +69,10 @@ public class Menu {
                     throw new OrderException("Špatný počet položek na řádku: " + lineNumber + " " + line);
                 String title = items[0];
                 BigDecimal price = new BigDecimal(items[1]);
-                int preparationTime = Integer.parseInt(items[2]);
+                Integer preparationTime = Integer.valueOf(items[2]);
                 Category category = Category.valueOf(items[3]);
                 String mainImage = items[4];
-                if (mainImage.isEmpty()) mainImage = "blank";
-                String otherImage = items[5];
-                if (otherImage.isEmpty()) otherImage = "blank";
-                Dish newDish = new Dish(title, price, preparationTime, category, mainImage, otherImage);
+                Dish newDish = new Dish(title, price, preparationTime, category, mainImage);
                 menu.add(newDish);
                 lineNumber++;
             }
