@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu extends CookBook {
+public class Menu {
     List<Dish> menu = new ArrayList<>();
 
     public List<Dish> getDishes() {
