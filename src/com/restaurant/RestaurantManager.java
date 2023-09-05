@@ -69,7 +69,6 @@ public class RestaurantManager {
                                 + order.getNumberOfOrderedDishes() + delimiter
                                 + order.formatTime(order.getOrderedTime()) + delimiter
                                 + order.formatTime(order.getFulfilmentTime()) + delimiter
-
                 );
             }
         } catch (IOException e) {
