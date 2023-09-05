@@ -1,14 +1,13 @@
 package com.restaurant;
 
-import com.restaurant.exceptions.OrderException;
-
+import com.restaurant.exception.OrderException;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class Menu {
+
     List<Dish> menu = new ArrayList<>();
 
     public List<Dish> getDishes() {

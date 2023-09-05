@@ -1,6 +1,7 @@
 package com.restaurant;
 
 public class Waiter {
+
     private Integer waiterId;
 
     public Waiter(Integer waiterId) {

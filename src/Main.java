@@ -1,12 +1,10 @@
 import com.restaurant.*;
-import com.restaurant.comparators.OrderTimeComparator;
-import com.restaurant.comparators.OrderWaiterComparator;
-import com.restaurant.exceptions.OrderException;
+import com.restaurant.comparator.OrderTimeComparator;
+import com.restaurant.comparator.OrderWaiterComparator;
+import com.restaurant.exception.OrderException;
 import com.restaurant.settings.Settings;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 public class Main {
     public static void main(String[] args) throws OrderException {
 

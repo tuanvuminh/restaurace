@@ -1,12 +1,11 @@
 package com.restaurant;
 
-import com.restaurant.exceptions.OrderException;
-
+import com.restaurant.exception.OrderException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Dish {
+
     private String title;
     private BigDecimal price;
     private Integer preparationTime;
@@ -45,8 +44,6 @@ public class Dish {
         this.mainImage = "blank";
     }
 
-    // Metody přidání a smazáni obrázků
-
     public void removeMainImage() {
         this.mainImage = "blank";
     }
@@ -58,8 +55,6 @@ public class Dish {
     public void removeImageFromList(String image) {
         images.remove(image);
     }
-
-    // Gettery a settery
 
     public String getTitle() {
         return title;

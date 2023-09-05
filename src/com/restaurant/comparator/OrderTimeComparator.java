@@ -1,9 +1,7 @@
-package com.restaurant.comparators;
+package com.restaurant.comparator;
 
 import com.restaurant.Order;
-
 import java.util.Comparator;
-
 public class OrderTimeComparator implements Comparator<Order> {
     @Override
     public int compare(Order p1, Order p2) {

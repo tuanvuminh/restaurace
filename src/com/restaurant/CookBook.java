@@ -1,14 +1,13 @@
 package com.restaurant;
 
-import com.restaurant.exceptions.OrderException;
-
+import com.restaurant.exception.OrderException;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class CookBook {
+
     private List<Dish> cookBook = new ArrayList<>();
 
     public void addDish(Dish dish) {
@@ -27,7 +26,6 @@ public class CookBook {
     public void getDish(int index) {
         cookBook.get(index);
     }
-
 
     public void loadFromFile(String filename, String delimiter) throws OrderException {
         String[] items = new String[0];
@@ -79,8 +77,6 @@ public class CookBook {
                     + dish.getPreparationTime() + " minut");
         }
     }
-
-
 }
 
 

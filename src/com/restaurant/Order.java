@@ -2,8 +2,8 @@ package com.restaurant;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 public class Order {
+
     private static int orderCounter = 1;
     private Integer numberOfOrder= orderCounter++;
     private Integer tableNumber;

@@ -1,14 +1,13 @@
 package com.restaurant;
 
-import com.restaurant.exceptions.OrderException;
-
+import com.restaurant.exception.OrderException;
 import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-
 public class RestaurantManager {
+
     private List<Order> orderList = new ArrayList<>();
 
     public void addOrder(Order order) {
