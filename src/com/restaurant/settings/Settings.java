@@ -1,35 +1,37 @@
 package com.restaurant.settings;
 
+import java.io.File;
+
 public class Settings {
 
-    public static String filenameTest() {
+    private static final String dataDirectory = "data";
 
-        return "test.txt";
+    public static String filenameTest() {
+        return dataDirectory + File.separator + "test.txt";
     }
 
     public static String filenameOrders() {
-
-        return "orders.txt";
+        return dataDirectory + File.separator + "orders.txt";
     }
 
     public static String filenameMenu() {
-
-        return "menu.txt";
+        return dataDirectory + File.separator + "menu.txt";
     }
 
     public static String filenameCookbook() {
-        return "cookbook.txt";
+        return dataDirectory + File.separator + "cookbook.txt";
     }
 
     public static String filenameNewCookbook() {
-        return "new-cookbook.txt";
+        return dataDirectory + File.separator + "new-cookbook.txt";
     }
 
     public static String filenameNewMenu() {
-        return "new-menu.txt";
+        return dataDirectory + File.separator + "new-menu.txt";
     }
 
-    public static String delimiter () {
+    public static String delimiter() {
         return "\t";
     }
 }
+
