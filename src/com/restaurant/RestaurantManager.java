@@ -1,6 +1,10 @@
 package com.restaurant;
 
 import com.restaurant.exception.OrderException;
+import com.restaurant.model.Dish;
+import com.restaurant.model.Order;
+import com.restaurant.model.Waiter;
+
 import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

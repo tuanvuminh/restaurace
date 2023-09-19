@@ -1,4 +1,4 @@
-package com.restaurant;
+package com.restaurant.enums;
 
 public enum Category {
 

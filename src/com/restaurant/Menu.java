@@ -1,6 +1,9 @@
 package com.restaurant;
 
+import com.restaurant.enums.Category;
 import com.restaurant.exception.OrderException;
+import com.restaurant.model.Dish;
+
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;

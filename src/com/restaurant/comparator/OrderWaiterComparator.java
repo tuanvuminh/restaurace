@@ -1,6 +1,6 @@
 package com.restaurant.comparator;
 
-import com.restaurant.Order;
+import com.restaurant.model.Order;
 import java.util.Comparator;
 public class OrderWaiterComparator implements Comparator<Order> {
     @Override

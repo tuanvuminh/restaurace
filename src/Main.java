@@ -1,7 +1,11 @@
 import com.restaurant.*;
 import com.restaurant.comparator.OrderTimeComparator;
 import com.restaurant.comparator.OrderWaiterComparator;
+import com.restaurant.enums.Category;
 import com.restaurant.exception.OrderException;
+import com.restaurant.model.Dish;
+import com.restaurant.model.Order;
+import com.restaurant.model.Waiter;
 import com.restaurant.settings.Settings;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
