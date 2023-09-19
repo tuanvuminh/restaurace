@@ -28,10 +28,10 @@ public class Dish {
         this.images = images;
     }
 
-    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage) throws OrderException  {
+    public Dish(String title, BigDecimal price, Integer preparationTime, Category category, String mainImage) {
         this.title = title;
         this.price = price;
-        this.setPreparationTime(preparationTime);
+        this.preparationTime = preparationTime;
         this.category = category;
         this.mainImage = mainImage;
     }

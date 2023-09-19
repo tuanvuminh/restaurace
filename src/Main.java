@@ -6,7 +6,7 @@ import com.restaurant.settings.Settings;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 public class Main {
-    public static void main(String[] args) throws OrderException {
+    public static void main(String[] args) {
 
         // 1. Testovací scénář
         CookBook cookBook = new CookBook();
