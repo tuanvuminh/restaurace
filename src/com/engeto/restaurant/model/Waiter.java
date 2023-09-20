@@ -1,4 +1,4 @@
-package com.restaurant.model;
+package com.engeto.restaurant.model;
 
 public class Waiter {
 

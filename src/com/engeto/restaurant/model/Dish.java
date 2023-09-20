@@ -1,6 +1,6 @@
-package com.restaurant.model;
+package com.engeto.restaurant.model;
 
-import com.restaurant.enums.Category;
+import com.engeto.restaurant.enums.Category;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

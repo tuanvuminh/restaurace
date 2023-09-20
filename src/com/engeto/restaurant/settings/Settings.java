@@ -1,4 +1,4 @@
-package com.restaurant.settings;
+package com.engeto.restaurant.settings;
 
 public class Settings {
 

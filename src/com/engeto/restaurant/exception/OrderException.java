@@ -1,4 +1,4 @@
-package com.restaurant.exception;
+package com.engeto.restaurant.exception;
 
 public class OrderException extends Exception {
     public OrderException(String message) {

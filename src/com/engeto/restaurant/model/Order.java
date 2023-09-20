@@ -1,4 +1,4 @@
-package com.restaurant.model;
+package com.engeto.restaurant.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

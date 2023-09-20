@@ -1,8 +1,8 @@
-package com.restaurant;
+package com.engeto.restaurant;
 
-import com.restaurant.enums.Category;
-import com.restaurant.exception.OrderException;
-import com.restaurant.model.Dish;
+import com.engeto.restaurant.exception.OrderException;
+import com.engeto.restaurant.model.Dish;
+import com.engeto.restaurant.enums.Category;
 
 import java.io.*;
 import java.math.BigDecimal;

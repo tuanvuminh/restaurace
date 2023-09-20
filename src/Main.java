@@ -1,12 +1,14 @@
-import com.restaurant.*;
-import com.restaurant.comparator.OrderTimeComparator;
-import com.restaurant.comparator.OrderWaiterComparator;
-import com.restaurant.enums.Category;
-import com.restaurant.exception.OrderException;
-import com.restaurant.model.Dish;
-import com.restaurant.model.Order;
-import com.restaurant.model.Waiter;
-import com.restaurant.settings.Settings;
+import com.engeto.restaurant.CookBook;
+import com.engeto.restaurant.Menu;
+import com.engeto.restaurant.RestaurantManager;
+import com.engeto.restaurant.comparator.OrderTimeComparator;
+import com.engeto.restaurant.comparator.OrderWaiterComparator;
+import com.engeto.restaurant.enums.Category;
+import com.engeto.restaurant.exception.OrderException;
+import com.engeto.restaurant.model.Dish;
+import com.engeto.restaurant.model.Order;
+import com.engeto.restaurant.model.Waiter;
+import com.engeto.restaurant.settings.Settings;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 public class Main {

@@ -1,6 +1,7 @@
-package com.restaurant.comparator;
+package com.engeto.restaurant.comparator;
 
-import com.restaurant.model.Order;
+import com.engeto.restaurant.model.Order;
+
 import java.util.Comparator;
 public class OrderTimeComparator implements Comparator<Order> {
     @Override

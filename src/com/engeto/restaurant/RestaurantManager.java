@@ -1,9 +1,9 @@
-package com.restaurant;
+package com.engeto.restaurant;
 
-import com.restaurant.exception.OrderException;
-import com.restaurant.model.Dish;
-import com.restaurant.model.Order;
-import com.restaurant.model.Waiter;
+import com.engeto.restaurant.exception.OrderException;
+import com.engeto.restaurant.model.Dish;
+import com.engeto.restaurant.model.Order;
+import com.engeto.restaurant.model.Waiter;
 
 import java.io.*;
 import java.math.BigDecimal;
