@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class Menu {
 
     List<Dish> menu = new ArrayList<>();
@@ -38,7 +39,18 @@ public class Menu {
             menu.add(dish);
             dish.setOnMenu(true);
         } else {
-            System.err.println("“" + dish + "“ nelze zařadit do menu, protože není v zásobníku receptů!");
+            System.err.println("\"" + dish + "\" nelze zařadit do menu, protože není v zásobníku receptů!");
+        }
+    }
+
+    public void addDish(Dish... dishes) {
+        for (Dish dish : dishes) {
+            if (dish.getInCookBook()) {
+                menu.add(dish);
+                dish.setOnMenu(true);
+            } else {
+                System.err.println("\"" + dish + "\" nelze zařadit do menu, protože není v zásobníku receptů!");
+            }
         }
     }
 

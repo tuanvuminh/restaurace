@@ -51,15 +51,12 @@ public class Main {
         dish1.removeImageFromList("kureci-rizek-03");
         dish1.removeMainImage();
 
-        cookBook.addDish(dish1);
-        cookBook.addDish(dish2);
-        cookBook.addDish(dish3);
+        cookBook.addDish(dish1, dish2, dish3);
         cookBook.printCookbook();
 
         // První a třetí jídlo zařaď do aktuálního menu, druhé jídlo nikoli.
         System.out.println();
-        menu.addDish(dish1);
-        menu.addDish(dish3);
+        menu.addDish(dish1, dish3);
         menu.printMenu();
 
         // Vytvoř alespoň tři objednávky pro stůj číslo 15 a jednu pro stůj číslo 2. Objednávky řeší alespoň dva různí číšníci.
@@ -79,10 +76,7 @@ public class Main {
                 LocalDateTime.now().getDayOfMonth(), 15, 00)
         );
 
-        restaurantManager.addOrder(order1);
-        restaurantManager.addOrder(order2);
-        restaurantManager.addOrder(order3);
-        restaurantManager.addOrder(order4);
+        restaurantManager.addOrder(order1, order2, order3, order4);
 
         // Min. dvě objednávky jsou již uzavřené, minimálně dvě ještě nikoli.
         order1.setFulfilmentTime(LocalDateTime.of(2023, 7, LocalDateTime.now().getDayOfMonth(), 11, 45)

@@ -18,6 +18,13 @@ public class CookBook {
         dish.setInCookBook(true);
     }
 
+    public void addDish(Dish... dishes) {
+        for (Dish dish : dishes) {
+            cookBook.add(dish);
+            dish.setInCookBook(true);
+        }
+    }
+
     public void removeDish(Dish dish) {
         cookBook.remove(dish);
     }

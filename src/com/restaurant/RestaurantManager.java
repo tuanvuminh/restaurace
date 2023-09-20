@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+
 public class RestaurantManager {
 
     private List<Order> orderList = new ArrayList<>();
@@ -18,7 +19,17 @@ public class RestaurantManager {
         if (order.getDish().getOnMenu()) {
             orderList.add(order);
         } else {
-            System.err.println("Jídlo “" + order.getDish() + "“ není v nabídce menu!");
+            System.err.println("Jídlo \"" + order.getDish() + "\" není v nabídce menu!");
+        }
+    }
+
+    public void addOrder(Order... orders) {
+        for (Order order : orders) {
+            if (order.getDish().getOnMenu()) {
+                orderList.add(order);
+            } else {
+                System.err.println("Jídlo \"" + order.getDish() + "\" není v nabídce menu!");
+            }
         }
     }
 
@@ -95,7 +106,7 @@ public class RestaurantManager {
 
     // 2.
     public void sort(Comparator comparator) {
-            Collections.sort(orderList, comparator);
+        Collections.sort(orderList, comparator);
     }
 
     // 3.
@@ -108,7 +119,7 @@ public class RestaurantManager {
                 totalPrice = totalPrice.add(order.getDish().getPrice().multiply(BigDecimal.valueOf(order.getNumberOfOrderedDishes())));
             }
         }
-        return waiter.toString()+ " [počet objednávek: " + numberOfOrders + "] [celková cena objednávek: " + totalPrice + " Kč]";
+        return waiter.toString() + " [počet objednávek: " + numberOfOrders + "] [celková cena objednávek: " + totalPrice + " Kč]";
     }
 
     // 4.
